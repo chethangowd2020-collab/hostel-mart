@@ -11,6 +11,7 @@ interface KitItem {
   mandatory: boolean;
   category: string;
   brands?: string[];
+  image?: string;
 }
 
 interface Kit {
@@ -48,7 +49,7 @@ const KITS: Kit[] = [
     discount: 0.12,
     discreetPackaging: true,
     items: [
-      { id: 'w1', name: 'Sanitary Pads (10 pack)', price: 199, mandatory: true, category: 'Hygiene', brands: ['Whisper', 'Stayfree', 'Sofy'] },
+      { id: 'w1', name: 'Sanitary Pads (10 pack)', price: 199, mandatory: true, category: 'Hygiene', brands: ['Whisper', 'Stayfree', 'Sofy'], image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&auto=format&fit=crop&q=60' },
       { id: 'w2', name: 'Pantyliners (20 pack)', price: 145, mandatory: false, category: 'Hygiene' },
       { id: 'w3', name: 'Pain Relief Roll-on', price: 110, mandatory: false, category: 'Health' },
       { id: 'w4', name: 'Dark Chocolate (Comfort)', price: 185, mandatory: true, category: 'Food' },

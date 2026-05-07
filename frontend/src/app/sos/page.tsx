@@ -6,7 +6,7 @@ import ProductCard from '@/components/ProductCard';
 import styles from './sos.module.css';
 
 const SOS_CATALOG = [
-  { id: 'sos1', name: 'Whisper Ultra Sanitary Pads (Pack of 7)', price: 89, originalPrice: 105, image: 'https://images.unsplash.com/photo-1605649487212-47bdab064f73?w=1000&auto=format&fit=crop&q=60', category: 'Hygiene', stock: 50 },
+  { id: 'sos1', name: 'Whisper Ultra Sanitary Pads (Pack of 7)', price: 89, originalPrice: 105, image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1000&auto=format&fit=crop&q=60', category: 'Hygiene', stock: 50 },
   { id: 'sos2', name: 'Dolo 650 - Strip of 15', price: 28, originalPrice: 35, image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1000&auto=format&fit=crop&q=60', category: 'Medicines', stock: 30 },
   { id: 'sos4', name: 'Maggi Cup Noodles - Masala', price: 45, originalPrice: 50, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=1000&auto=format&fit=crop&q=60', category: 'Food', stock: 100 },
   { id: 'sos6', name: 'Paracetamol 500mg - Strip of 10', price: 15, originalPrice: 20, image: 'https://images.unsplash.com/photo-1559187359-3e9ef8c96a44?w=1000&auto=format&fit=crop&q=60', category: 'Medicines', stock: 40 },

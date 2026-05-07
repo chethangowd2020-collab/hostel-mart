@@ -55,7 +55,7 @@ const CATEGORIES = [
 const SOS_PRODUCTS = [
   { id: 's4', name: 'Instant Coffee', price: 10, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&auto=format&fit=crop&q=60', category: 'Study Fuel', stock: 50 },
   { id: 's6', name: 'Toothbrush', price: 45, image: 'https://images.unsplash.com/photo-1607619056574-7b4d1937de81?w=400&auto=format&fit=crop&q=60', category: 'Personal Care', stock: 20 },
-  { id: 's7', name: 'Sanitary Pads (XL)', price: 95, image: 'https://images.unsplash.com/photo-1605649487212-47bdab064f73?w=400&auto=format&fit=crop&q=60', category: "Women's Essentials", stock: 30 },
+  { id: 's7', name: 'Sanitary Pads (XL)', price: 95, image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&auto=format&fit=crop&q=60', category: "Women's Essentials", stock: 30 },
   { id: 's8', name: 'Bathing Soap', price: 40, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60', category: 'Personal Care', stock: 40 },
 ];
 

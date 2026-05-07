@@ -34,7 +34,7 @@ const MEDICAL_CATEGORIES = [
       { id: 'm11', name: 'Band-aids (Pack of 10)', price: 25, image: 'https://images.unsplash.com/photo-1559187359-3e9ef8c96a44?w=400&auto=format&fit=crop&q=60', category: 'Medical', stock: 80 },
       { id: 'm12', name: 'Antiseptic Cream', price: 65, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60', category: 'Medical', stock: 25 },
       { id: 'm13', name: 'Cotton Roll', price: 35, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60', category: 'Medical', stock: 40 },
-      { id: 'm14', name: 'Gauze Pads', price: 50, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60', category: 'Medical', stock: 35 },
+      { id: 'm14', name: 'Gauze Pads', price: 50, image: 'https://images.unsplash.com/photo-1559187359-3e9ef8c96a44?w=400&auto=format&fit=crop&q=60', category: 'Medical', stock: 35 },
       { id: 'm15', name: 'Medical Tape', price: 30, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60', category: 'Medical', stock: 50 },
       { id: 'm16', name: 'Burn Relief Cream', price: 95, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60', category: 'Medical', stock: 15 },
     ]
