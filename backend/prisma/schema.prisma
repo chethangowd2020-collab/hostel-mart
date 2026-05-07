@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  VENDOR
+  DELIVERY
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum SubscriptionPlan {
+  NONE
+  MONTHLY
+  HALF_YEARLY
+  YEARLY
+}
+
+model User {
+  id                String           @id @default(uuid())
+  name              String
+  phone             String           @unique
+  role              Role             @default(STUDENT)
+  collegeName       String?
+  hostelName        String?
+  roomNumber        String?
+  gender            String?
+  profilePhoto      String?
+  course            String?
+  yearOfStudy       Int?
+  subscription      SubscriptionPlan @default(NONE)
+  loyaltyPoints     Int              @default(0)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  // Relations
+  orders            Order[]          @relation("StudentOrders")
+  vendorOrders      Order[]          @relation("VendorOrders")
+  deliveryOrders    Order[]          @relation("DeliveryOrders")
+  products          Product[]        // For Vendors
+  reviews           Review[]
+  loyaltyHistory    LoyaltyHistory[]
+  wishlist          WishlistProduct[]
+  roommateGroup     RoommateGroup?   @relation(fields: [roommateGroupId], references: [id])
+  roommateGroupId   String?
+}
+
+model Product {
+  id                String           @id @default(uuid())
+  name              String
+  description       String
+  price             Float
+  originalPrice     Float?
+  image             String
+  category          String
+  stock             Int              @default(0)
+  isSOS             Boolean          @default(false)
+  isExpiringSoon    Boolean          @default(false)
+  expiryDate        DateTime?
+  vendor            User             @relation(fields: [vendorId], references: [id])
+  vendorId          String
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  // Relations
+  orderItems        OrderItem[]
+  reviews           Review[]
+  wishlistProducts  WishlistProduct[]
+  cartItems         CartItem[]
+}
+
+model Order {
+  id                String           @id @default(uuid())
+  status            OrderStatus      @default(PENDING)
+  totalPrice        Float
+  deliverySlot      String?
+  deliveryAddress   String
+  otp               String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  // Relations
+  student           User             @relation("StudentOrders", fields: [studentId], references: [id])
+  studentId         String
+  vendor            User             @relation("VendorOrders", fields: [vendorId], references: [id])
+  vendorId          String
+  deliveryPerson    User?            @relation("DeliveryOrders", fields: [deliveryPersonId], references: [id])
+  deliveryPersonId  String?
+  items             OrderItem[]
+}
+
+model OrderItem {
+  id                String   @id @default(uuid())
+  quantity          Int
+  priceAtPurchase   Float
+  order             Order    @relation(fields: [orderId], references: [id])
+  orderId           String
+  product           Product  @relation(fields: [productId], references: [id])
+  productId         String
+}
+
+model RoommateGroup {
+  id                String   @id @default(uuid())
+  code              String   @unique
+  members           User[]
+  cart              CartItem[]
+  createdAt         DateTime @default(now())
+}
+
+model CartItem {
+  id                String        @id @default(uuid())
+  quantity          Int           @default(1)
+  studentId         String
+  product           Product       @relation(fields: [productId], references: [id])
+  productId         String
+  group             RoommateGroup @relation(fields: [groupId], references: [id])
+  groupId           String
+}
+
+model Review {
+  id                String   @id @default(uuid())
+  rating            Int
+  comment           String
+  photo             String?
+  student           User     @relation(fields: [studentId], references: [id])
+  studentId         String
+  product           Product  @relation(fields: [productId], references: [id])
+  productId         String
+  vendorResponse    String?
+  createdAt         DateTime @default(now())
+}
+
+model LoyaltyHistory {
+  id                String   @id @default(uuid())
+  points            Int
+  type              String   // EARNED, REDEEMED
+  reason            String
+  student           User     @relation(fields: [studentId], references: [id])
+  studentId         String
+  createdAt         DateTime @default(now())
+}
+
+model WishlistProduct {
+  id                String   @id @default(uuid())
+  user              User     @relation(fields: [userId], references: [id])
+  userId            String
+  product           Product  @relation(fields: [productId], references: [id])
+  productId         String
+  createdAt         DateTime @default(now())
+}

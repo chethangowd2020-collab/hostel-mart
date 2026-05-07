@@ -1,0 +1,174 @@
+.page {
+  min-height: 100vh;
+  background: var(--accent);
+}
+
+.hero {
+  padding: 80px 0 60px;
+  text-align: center;
+}
+
+.badge {
+  background: var(--primary);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.hero h1 span {
+  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.planCard {
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.popularCard {
+  border: 2px solid var(--secondary);
+  transform: scale(1.05);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--secondary);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.planCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.priceGroup {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+}
+
+.currency {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.price {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.duration {
+  color: var(--text-muted);
+}
+
+.savings {
+  color: #2E7D32;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 25px;
+}
+
+.planCard button {
+  width: 100%;
+}
+
+.comparison {
+  padding-bottom: 100px;
+}
+
+.comparison h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.tableWrapper {
+  padding: 0;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 20px 30px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.table th {
+  background: var(--accent);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.table td:not(:first-child) {
+  text-align: center;
+}
+
+.check {
+  color: #2E7D32;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.cross {
+  color: var(--alert);
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  
+  .popularCard {
+    transform: none;
+    margin: 20px 0;
+  }
+}

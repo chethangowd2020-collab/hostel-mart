@@ -1,0 +1,194 @@
+.page {
+  min-height: 100vh;
+  background: #F8F9FA;
+  padding-bottom: 80px;
+}
+
+.header {
+  background: #3D2C8D;
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 24px 24px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.profile h3 {
+  font-size: 1rem;
+}
+
+.onlineStatus {
+  font-size: 0.75rem;
+  background: #4CAF50;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.earnings {
+  text-align: right;
+}
+
+.earnings small {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.earnings strong {
+  font-size: 1.2rem;
+}
+
+.main {
+  padding: 20px;
+}
+
+.taskTabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.tab, .tabActive {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.tab { background: white; color: #666; }
+.tabActive { background: var(--primary); color: white; }
+
+.mapContainer {
+  margin-bottom: 25px;
+}
+
+.mapPlaceholder {
+  height: 220px;
+  background: #E5E7EB;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapOverlay {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: white;
+  padding: 8px 15px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.markerStudent, .markerVendor {
+  position: absolute;
+  font-size: 1.5rem;
+}
+
+.markerStudent { top: 40%; right: 25%; }
+.markerVendor { bottom: 30%; left: 20%; }
+
+.routeLine {
+  position: absolute;
+  width: 150px;
+  height: 2px;
+  background: var(--primary);
+  transform: rotate(-30deg);
+  opacity: 0.4;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #F1F5F9;
+  padding-bottom: 10px;
+}
+
+.orderId { font-weight: 700; color: var(--primary); }
+.taskStatus { font-size: 0.8rem; font-weight: 700; color: #EF6C00; }
+
+.taskInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label { color: #888; font-size: 0.85rem; }
+.value { font-weight: 600; font-size: 0.9rem; }
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btnChat {
+  background: #F1F5F9;
+  color: #1E293B;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+}
+
+.bottomNavItem, .bottomNavItemActive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+}
+
+.bottomNavItemActive {
+  color: var(--primary);
+}
