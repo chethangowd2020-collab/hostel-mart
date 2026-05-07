@@ -1,7 +1,7 @@
 import express from 'express';
 import { getProducts, getProductById, registerRestockNotify } from '../controllers/product.controller';
 import { createOrder, getOrderHistory, confirmSafety } from '../controllers/order.controller';
-import { getProfile, updateCollege, upgradeToPrime } from '../controllers/user.controller';
+import { getProfile, updateCollege, upgradeToPrime, updateProfile } from '../controllers/user.controller';
 import { addToWishlist, getWishlist } from '../controllers/wishlist.controller';
 import { postProductReview, upvoteReview } from '../controllers/review.controller';
 import { sendOTP, verifyOTP } from '../controllers/auth.controller';

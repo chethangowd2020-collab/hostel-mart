@@ -20,13 +20,15 @@ export const addToWishlist = async (req: Request, res: Response) => {
 export const getWishlist = async (req: Request, res: Response) => {
   try {
     const { studentId } = req.params;
+    if (!studentId) return res.status(400).json({ error: 'Student ID is required' });
+
     const wishlist = await prisma.wishlistProduct.findMany({
       where: { userId: studentId },
       include: { product: true },
     });
     
     // Feature 11: Logic to flag price drops
-    const processed = wishlist.map(item => ({
+    const processed = wishlist.map((item: any) => ({
       ...item,
       hasPriceDrop: item.product.price < item.addedPrice,
       dropAmount: Math.max(0, item.addedPrice - item.product.price),
