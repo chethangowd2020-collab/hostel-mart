@@ -12,10 +12,10 @@ export default function Navbar() {
         </div>
         
         <div className={styles.center}>
-          <div className={styles.pointsPill}>
+          <Link href="/loyalty" className={styles.pointsPill}>
             <span className={styles.pointsIcon}>⭐</span>
             <span className={styles.pointsValue}>1,250 Pts</span>
-          </div>
+          </Link>
         </div>
 
         <div className={styles.right}>
