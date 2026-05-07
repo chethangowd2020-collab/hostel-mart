@@ -8,13 +8,18 @@ interface ProductProps {
   originalPrice?: number;
   image: string;
   category: string;
-  isExpiringSoon?: boolean;
-  isLowStock?: boolean;
+  stock: number;
+  discount?: number;
+  isTrending?: boolean;
+  daysToExpiry?: number;
+  expiryDate?: string;
 }
 
 export default function ProductCard({ product }: { product: ProductProps }) {
-  const discount = product.originalPrice 
+  const discountAmount = product.originalPrice 
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) 
+    : 0;
+
   return (
     <div className={`${styles.card} card`}>
       <div className={styles.imageContainer}>

@@ -17,8 +17,9 @@ export default function GroupOrder({ params }: { params: Promise<{ code: string 
   const [timeLeft, setTimeLeft] = useState(600); // 10 mins in seconds
 
   useEffect(() => {
-    // Connect to backend (assuming it's running on localhost:5000)
-    const socket = io('http://localhost:5000');
+    // Connect to backend (using environment variable for production)
+    const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5000';
+    const socket = io(socketUrl);
     
     socket.emit('join-room', code);
 
@@ -46,6 +47,8 @@ export default function GroupOrder({ params }: { params: Promise<{ code: string 
   const totalAmount = members.reduce((sum, member) => 
     sum + member.items.reduce((mSum, item) => mSum + (item.price * item.qty), 0), 0
   );
+
+  const yourShare = members.find(m => m.id === 'u1')?.items.reduce((s, i) => s + (i.price * i.qty), 0) || 0;
 
   return (
     <div className={styles.page}>
@@ -94,33 +97,34 @@ export default function GroupOrder({ params }: { params: Promise<{ code: string 
             </div>
           </div>
 
-              <div className={`${styles.summaryCard} card`}>
-                <h3>Bill Summary</h3>
-                <div className={styles.summaryRow}>
-                  <span>Total Cart Value</span>
-                  <span>₹{totalAmount}</span>
-                </div>
-                <div className={styles.summaryRow}>
-                  <span>Your Share</span>
-                  <span className={styles.yourShare}>₹{members.find(m => m.id === 'u1')?.items.reduce((s, i) => s + (i.price * i.qty), 0)}</span>
-                </div>
-                <hr className={styles.divider} />
-                <div className={styles.paymentStatus}>
-                  <h4>Payment Status</h4>
-                  {members.map(member => (
-                    <div key={member.id} className={styles.memberStatus}>
-                      <span className={styles.statusDot} style={{ background: member.id === 'u1' ? '#4CAF50' : '#FFC107' }}></span>
-                      <span>{member.name}</span>
-                      <span className={styles.statusText}>{member.id === 'u1' ? 'Paid' : 'Pending...'}</span>
-                    </div>
-                  ))}
-                </div>
-                
-                <button className="btn-primary" style={{ width: '100%', marginTop: '20px' }}>
-                  Pay My Share (₹{members.find(m => m.id === 'u1')?.items.reduce((s, i) => s + (i.price * i.qty), 0)})
-                </button>
-                <p className={styles.infoText}>The order will be placed once all roommates have paid their share.</p>
+          <div className={styles.summaryActions}>
+            <div className={`${styles.summaryCard} card`}>
+              <h3>Bill Summary</h3>
+              <div className={styles.summaryRow}>
+                <span>Total Cart Value</span>
+                <span>₹{totalAmount}</span>
               </div>
+              <div className={styles.summaryRow}>
+                <span>Your Share</span>
+                <span className={styles.yourShare}>₹{yourShare}</span>
+              </div>
+              <hr className={styles.divider} />
+              <div className={styles.paymentStatus}>
+                <h4>Payment Status</h4>
+                {members.map(member => (
+                  <div key={member.id} className={styles.memberStatus}>
+                    <span className={styles.statusDot} style={{ background: member.id === 'u1' ? '#4CAF50' : '#FFC107' }}></span>
+                    <span>{member.name}</span>
+                    <span className={styles.statusText}>{member.id === 'u1' ? 'Paid' : 'Pending...'}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <button className="btn-primary" style={{ width: '100%', marginTop: '20px' }}>
+                Pay My Share (₹{yourShare})
+              </button>
+              <p className={styles.infoText}>The order will be placed once all roommates have paid their share.</p>
+            </div>
             
             <div className={`${styles.inviteCard} glass-card`}>
               <h4>Invite Roommates</h4>
