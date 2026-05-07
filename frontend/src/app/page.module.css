@@ -382,3 +382,160 @@
     height: 60px;
   }
 }
+
+/* ── Forgot Something Strip ── */
+.forgotStrip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.forgotChip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 30px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.forgotChip:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 4px 12px rgba(244,114,182,0.15);
+  transform: translateY(-2px);
+}
+
+.forgotAdded {
+  border-color: #4CAF50;
+  background: #f0fff4;
+  color: #4CAF50;
+}
+
+.forgotEmoji {
+  font-size: 1.1rem;
+}
+
+.forgotPrice {
+  color: var(--secondary);
+  font-size: 0.75rem;
+}
+
+.checkmark {
+  background: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+/* ── Combo Cards ── */
+.comboGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.comboCard {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.comboCard:hover {
+  transform: translateY(-4px);
+}
+
+.comboBadge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+
+.comboCard h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.comboCard p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.comboFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comboFooter strong {
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.comboFooter .btn-primary {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+  border-radius: 20px;
+}
+
+/* ── Category Emoji ── */
+.catEmoji {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 16px;
+  padding: 20px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.categoryCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.categoryCard span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ── Badge Red ── */
+.badgeRed {
+  background: rgba(255,45,45,0.1);
+  color: #FF2D2D;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
