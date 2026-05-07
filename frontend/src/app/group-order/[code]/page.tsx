@@ -94,31 +94,33 @@ export default function GroupOrder({ params }: { params: Promise<{ code: string 
             </div>
           </div>
 
-          <div className={styles.summarySection}>
-            <div className={`${styles.summaryCard} card`}>
-              <h3>Bill Summary</h3>
-              <div className={styles.summaryRow}>
-                <span>Subtotal</span>
-                <span>₹{totalAmount}</span>
+              <div className={`${styles.summaryCard} card`}>
+                <h3>Bill Summary</h3>
+                <div className={styles.summaryRow}>
+                  <span>Total Cart Value</span>
+                  <span>₹{totalAmount}</span>
+                </div>
+                <div className={styles.summaryRow}>
+                  <span>Your Share</span>
+                  <span className={styles.yourShare}>₹{members.find(m => m.id === 'u1')?.items.reduce((s, i) => s + (i.price * i.qty), 0)}</span>
+                </div>
+                <hr className={styles.divider} />
+                <div className={styles.paymentStatus}>
+                  <h4>Payment Status</h4>
+                  {members.map(member => (
+                    <div key={member.id} className={styles.memberStatus}>
+                      <span className={styles.statusDot} style={{ background: member.id === 'u1' ? '#4CAF50' : '#FFC107' }}></span>
+                      <span>{member.name}</span>
+                      <span className={styles.statusText}>{member.id === 'u1' ? 'Paid' : 'Pending...'}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <button className="btn-primary" style={{ width: '100%', marginTop: '20px' }}>
+                  Pay My Share (₹{members.find(m => m.id === 'u1')?.items.reduce((s, i) => s + (i.price * i.qty), 0)})
+                </button>
+                <p className={styles.infoText}>The order will be placed once all roommates have paid their share.</p>
               </div>
-              <div className={styles.summaryRow}>
-                <span>Delivery Fee</span>
-                <span>₹20</span>
-              </div>
-              <div className={styles.summaryRow}>
-                <span>Platform Fee</span>
-                <span>₹5</span>
-              </div>
-              <hr className={styles.divider} />
-              <div className={`${styles.summaryRow} ${styles.totalRow}`}>
-                <span>Total Amount</span>
-                <span>₹{totalAmount + 25}</span>
-              </div>
-              <button className="btn-primary" style={{ width: '100%', marginTop: '20px' }}>
-                Proceed to Checkout
-              </button>
-              <p className={styles.infoText}>Each member pays individually after checkout.</p>
-            </div>
             
             <div className={`${styles.inviteCard} glass-card`}>
               <h4>Invite Roommates</h4>
