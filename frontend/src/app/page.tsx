@@ -33,50 +33,17 @@ const HERO_SLIDES = [
   }
 ];
 
-const MOCK_PRODUCTS = [
-  {
-    id: '1',
-    name: 'Maggi 2-Minute Noodles Masala, 70g',
-    price: 14,
-    originalPrice: 15,
-    image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=1000',
-    category: 'Quick Food',
-    isExpiringSoon: true
-  },
-  {
-    id: '2',
-    name: 'Amul Taaza Homogenised Toned Milk, 1L',
-    price: 72,
-    originalPrice: 75,
-    image: 'https://images.unsplash.com/photo-1563636619-e9107da5a1bb?q=80&w=1000',
-    category: 'Dairy',
-    isExpiringSoon: false
-  },
-  {
-    id: '3',
-    name: 'Classmate Notebook - A4, Single Line',
-    price: 65,
-    originalPrice: 70,
-    image: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?q=80&w=1000',
-    category: 'Stationery'
-  },
-  {
-    id: '4',
-    name: 'Cadbury Dairy Milk Silk Chocolate Bar',
-    price: 160,
-    originalPrice: 180,
-    image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=1000',
-    category: 'Snacks'
-  },
-  {
-    id: '5',
-    name: 'Red Bull Energy Drink, 250ml',
-    price: 115,
-    originalPrice: 125,
-    image: 'https://images.unsplash.com/photo-1622543953490-3b7bc4b39c65?q=80&w=1000',
-    category: 'Beverages',
-    isLowStock: true
-  }
+const MOCK_USUALS = [
+  { id: 'u1', name: 'Maggi Noodles', orders: 12, price: 14, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=1000' },
+  { id: 'u2', name: 'Nescafe Coffee Box', orders: 8, price: 180, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=1000' },
+  { id: 'u3', name: 'Oreo Biscuits', orders: 6, price: 30, image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=1000' },
+  { id: 'u4', name: 'Amul Milk 1L', orders: 5, price: 72, image: 'https://images.unsplash.com/photo-1563636619-e9107da5a1bb?q=80&w=1000' },
+  { id: 'u5', name: 'Real Orange Juice', orders: 4, price: 95, image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?q=80&w=1000' }
+];
+
+const PAST_ORDERS = [
+  { id: 'ord1', date: '2 days ago', items: ['Maggi x2', 'Coke x1'], total: 128 },
+  { id: 'ord2', date: '5 days ago', items: ['Stationery Kit x1'], total: 450 }
 ];
 
 export default function Home() {
@@ -127,55 +94,78 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Quick Actions Section */}
+        {/* Quick Actions Row */}
         <section className="container">
-          <div className={styles.sectionHeader}>
-            <h2>Quick Actions</h2>
-          </div>
           <div className={styles.quickActions}>
             <Link href="/sos" className={`${styles.actionCard} card`}>
               <div className={styles.actionIcon} style={{ background: '#FF2D2D15', color: '#FF2D2D' }}>🚨</div>
               <h3>SOS Delivery</h3>
               <p>Midnight essentials</p>
             </Link>
-            <div className={`${styles.actionCard} card`}>
+            <Link href="/group-order/new" className={`${styles.actionCard} card`}>
               <div className={styles.actionIcon} style={{ background: '#3D2C8D15', color: '#3D2C8D' }}>👥</div>
               <h3>Group Order</h3>
               <p>Order with roommates</p>
-            </div>
+            </Link>
             <Link href="/kit-builder" className={`${styles.actionCard} card`}>
               <div className={styles.actionIcon} style={{ background: '#FF6B2C15', color: '#FF6B2C' }}>📦</div>
               <h3>My Kits</h3>
               <p>Essential survival kits</p>
             </Link>
-            <div className={`${styles.actionCard} card`}>
+            <Link href="/orders" className={`${styles.actionCard} card`}>
               <div className={styles.actionIcon} style={{ background: '#4CAF5015', color: '#4CAF50' }}>🔄</div>
               <h3>Reorder</h3>
               <p>Quick usuals</p>
-            </div>
+            </Link>
           </div>
         </section>
 
-        {/* Expiring Soon Section */}
+        {/* FEATURE 2 — My Usuals */}
         <section className="container" style={{ marginTop: '50px' }}>
           <div className={styles.sectionHeader}>
             <div className={styles.headerLeft}>
-              <h2>Expiring Soon</h2>
-              <span className={styles.badgeGreen}>Up to 50% OFF</span>
+              <h2>My Usuals</h2>
+              <span className={styles.badgeBlue}>Top 5 Favorites</span>
             </div>
-            <button className={styles.viewAll}>View All</button>
           </div>
-          <div className={styles.productGrid}>
-            {MOCK_PRODUCTS.map((product) => (
-              <ProductCard key={product.id} product={product} />
+          <div className={styles.usualsRow}>
+            {MOCK_USUALS.map((item) => (
+              <div key={item.id} className={`${styles.usualCard} card`}>
+                <img src={item.image} alt={item.name} />
+                <h4>{item.name}</h4>
+                <p>{item.orders} times ordered</p>
+                <button className={styles.reorderBtnSmall}>+ Add</button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FEATURE 2 — Order Again (Recent Orders) */}
+        <section className="container" style={{ marginTop: '50px' }}>
+          <div className={styles.sectionHeader}>
+            <h2>Order Again</h2>
+            <Link href="/orders" className={styles.viewAll}>View History</Link>
+          </div>
+          <div className={styles.orderAgainGrid}>
+            {PAST_ORDERS.map((order) => (
+              <div key={order.id} className={`${styles.recentOrderCard} card`}>
+                <div className={styles.orderMeta}>
+                  <strong>{order.date}</strong>
+                  <span>₹{order.total}</span>
+                </div>
+                <p>{order.items.join(', ')}</p>
+                <button className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>
+                  Reorder All
+                </button>
+              </div>
             ))}
           </div>
         </section>
 
         {/* Categories Section */}
-        <section className="container" style={{ marginTop: '50px' }}>
+        <section className="container" style={{ marginTop: '50px', paddingBottom: '100px' }}>
           <div className={styles.sectionHeader}>
-            <h2>Categories</h2>
+            <h2>Explore Categories</h2>
           </div>
           <div className={styles.categoriesGrid}>
             {['Food', 'Groceries', 'Stationery', 'Medicines', 'Women Essentials', 'Electronics'].map((cat) => (
