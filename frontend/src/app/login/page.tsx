@@ -5,14 +5,8 @@ import { useRouter } from 'next/navigation';
 import styles from './login.module.css';
 
 const COLLEGES = [
-  "IIT Bombay",
-  "IIT Delhi",
-  "IIT Madras",
-  "BITS Pilani",
-  "VIT Vellore",
-  "MIT Manipal",
-  "SRM University",
-  "Amity University"
+  "IIT Bombay", "IIT Delhi", "IIT Madras", "BITS Pilani", 
+  "VIT Vellore", "MIT Manipal", "SRM University", "Amity University"
 ];
 
 export default function Login() {
@@ -20,6 +14,8 @@ export default function Login() {
   const [step, setStep] = useState(1); // 1: Phone, 2: OTP, 3: Profile Setup
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [profile, setProfile] = useState({
     name: '',
     college: '',
@@ -27,10 +23,29 @@ export default function Login() {
     room: ''
   });
 
-  const handlePhoneSubmit = (e: React.FormEvent) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+
+  const handlePhoneSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (phone.length >= 10) {
-      setStep(2);
+    setLoading(true);
+    setError('');
+    
+    try {
+      const res = await fetch(`${apiUrl}/auth/send-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStep(2);
+      } else {
+        setError(data.error || 'Failed to send OTP');
+      }
+    } catch (err) {
+      setError('Connection failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,22 +55,44 @@ export default function Login() {
     newOtp[index] = value;
     setOtp(newOtp);
     
-    // Auto focus next input
     if (value && index < 5) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       nextInput?.focus();
     }
   };
 
-  const handleOtpSubmit = (e: React.FormEvent) => {
+  const handleOtpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate check: if "new user", go to step 3, else go home
-    setStep(3); 
+    setLoading(true);
+    setError('');
+    
+    try {
+      const res = await fetch(`${apiUrl}/auth/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, code: otp.join('') }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        if (data.isNewUser) {
+          setStep(3);
+        } else {
+          // Success: Logged in
+          router.push('/');
+        }
+      } else {
+        setError(data.error || 'Invalid OTP');
+      }
+    } catch (err) {
+      setError('Verification failed.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleProfileSubmit = (e: React.FormEvent) => {
+  const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Save to DB via API (Mocked for now)
+    // In a real app, we'd call an API like /api/users/profile
     router.push('/');
   };
 
@@ -78,6 +115,8 @@ export default function Login() {
           </div>
         </div>
 
+        {error && <div className={styles.errorBanner}>{error}</div>}
+
         {step === 1 && (
           <form className={styles.fadeSlide} onSubmit={handlePhoneSubmit}>
             <h2>Welcome to the Mart 👋</h2>
@@ -92,9 +131,12 @@ export default function Login() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 autoFocus
+                disabled={loading}
               />
             </div>
-            <button type="submit" className="btn-primary">Get OTP</button>
+            <button type="submit" className="btn-primary" disabled={loading}>
+              {loading ? 'Sending...' : 'Get OTP'}
+            </button>
           </form>
         )}
 
@@ -113,11 +155,14 @@ export default function Login() {
                   value={digit}
                   onChange={(e) => handleOtpChange(i, e.target.value)}
                   autoFocus={i === 0}
+                  disabled={loading}
                 />
               ))}
             </div>
-            <button type="submit" className="btn-primary">Verify OTP</button>
-            <button type="button" className={styles.linkBtn} onClick={() => setStep(1)}>
+            <button type="submit" className="btn-primary" disabled={loading}>
+              {loading ? 'Verifying...' : 'Verify OTP'}
+            </button>
+            <button type="button" className={styles.linkBtn} onClick={() => setStep(1)} disabled={loading}>
               Change Phone Number
             </button>
           </form>
@@ -126,7 +171,7 @@ export default function Login() {
         {step === 3 && (
           <form className={styles.fadeSlide} onSubmit={handleProfileSubmit}>
             <h2>Complete Your Profile 🎓</h2>
-            <p>Help us customize your experience and deliveries.</p>
+            <p>Help us customize your experience.</p>
             
             <div className={styles.inputGroup}>
               <label>Full Name</label>
@@ -154,33 +199,17 @@ export default function Login() {
             <div className={styles.row}>
               <div className={styles.inputGroup}>
                 <label>Hostel Name</label>
-                <input 
-                  type="text" 
-                  placeholder="e.g., Block B" 
-                  required
-                  value={profile.hostel}
-                  onChange={(e) => setProfile({...profile, hostel: e.target.value})}
-                />
+                <input type="text" placeholder="Block B" required value={profile.hostel} onChange={(e) => setProfile({...profile, hostel: e.target.value})} />
               </div>
               <div className={styles.inputGroup} style={{ width: '100px' }}>
                 <label>Room #</label>
-                <input 
-                  type="text" 
-                  placeholder="304" 
-                  required
-                  value={profile.room}
-                  onChange={(e) => setProfile({...profile, room: e.target.value})}
-                />
+                <input type="text" placeholder="304" required value={profile.room} onChange={(e) => setProfile({...profile, room: e.target.value})} />
               </div>
             </div>
 
             <button type="submit" className="btn-primary">Start Shopping</button>
           </form>
         )}
-
-        <div className={styles.terms}>
-          By continuing, you agree to our <span>Terms of Service</span> and <span>Privacy Policy</span>.
-        </div>
       </div>
     </div>
   );
