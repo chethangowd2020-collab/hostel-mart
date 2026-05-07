@@ -115,6 +115,50 @@
   width: 100%;
 }
 
+.planBrief {
+  list-style: none;
+  margin: 15px 0 25px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.management {
+  margin-bottom: 60px;
+}
+
+.manageCard {
+  padding: 30px;
+  background: white;
+}
+
+.manageRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.manageInfo strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.manageActions {
+  display: flex;
+  gap: 15px;
+}
+
+.btnOutline {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
 .comparison {
   padding-bottom: 100px;
 }
@@ -140,26 +184,28 @@
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.table th {
-  background: var(--accent);
-  font-weight: 700;
+.table td p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.primeCol {
   color: var(--primary);
+  font-weight: 800;
+  font-size: 1.1rem;
 }
 
-.table td:not(:first-child) {
-  text-align: center;
-}
-
-.check {
-  color: #2E7D32;
-  font-weight: 900;
+.primeBadgeLarge {
+  background: var(--primary);
+  color: white;
+  padding: 8px 24px;
+  border-radius: 30px;
+  font-weight: 800;
   font-size: 1.2rem;
-}
-
-.cross {
-  color: var(--alert);
-  font-weight: 900;
-  font-size: 1.2rem;
+  display: inline-block;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
 }
 
 @media (max-width: 768px) {
