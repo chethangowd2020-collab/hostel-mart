@@ -6,10 +6,12 @@ import ProductCard from '@/components/ProductCard';
 import styles from './sos.module.css';
 
 const SOS_CATALOG = [
-  { id: 'sos1', name: 'Whisper Ultra Sanitary Pads (Pack of 7)', price: 95, originalPrice: 105, image: 'https://images.unsplash.com/photo-1627384113743-6bd5a474fffd?q=80&w=1000', category: 'Hygiene', stock: 50 },
-  { id: 'sos2', name: 'Dolo 650 - Strip of 15', price: 32, originalPrice: 35, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1000', category: 'Medicines', stock: 30 },
-  { id: 'sos4', name: 'Maggi Cup Noodles - Masala', price: 50, originalPrice: 50, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=1000', category: 'Food', stock: 100 },
-  { id: 'sos5', name: 'Red Bull Energy Drink (250ml)', price: 115, originalPrice: 125, image: 'https://images.unsplash.com/photo-1622543953490-3b7bc4b39c65?q=80&w=1000', category: 'Drinks', stock: 45 }
+  { id: 'sos1', name: 'Whisper Ultra Sanitary Pads (Pack of 7)', price: 89, originalPrice: 105, image: 'https://images.unsplash.com/photo-1605649487212-47bdab064f73?w=1000&auto=format&fit=crop&q=60', category: 'Hygiene', stock: 50 },
+  { id: 'sos2', name: 'Dolo 650 - Strip of 15', price: 28, originalPrice: 35, image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1000&auto=format&fit=crop&q=60', category: 'Medicines', stock: 30 },
+  { id: 'sos4', name: 'Maggi Cup Noodles - Masala', price: 45, originalPrice: 50, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=1000&auto=format&fit=crop&q=60', category: 'Food', stock: 100 },
+  { id: 'sos6', name: 'Paracetamol 500mg - Strip of 10', price: 15, originalPrice: 20, image: 'https://images.unsplash.com/photo-1559187359-3e9ef8c96a44?w=1000&auto=format&fit=crop&q=60', category: 'Medicines', stock: 40 },
+  { id: 'sos7', name: 'Toothbrush (Soft)', price: 35, originalPrice: 45, image: 'https://images.unsplash.com/photo-1607619056574-7b4d1937de81?w=1000&auto=format&fit=crop&q=60', category: 'Hygiene', stock: 60 },
+  { id: 'sos8', name: 'Instant Coffee Sachet (3pk)', price: 25, originalPrice: 30, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=1000&auto=format&fit=crop&q=60', category: 'Food', stock: 80 }
 ];
 
 export default function SOSPage() {
