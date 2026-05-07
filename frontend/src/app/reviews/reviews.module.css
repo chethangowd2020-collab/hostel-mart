@@ -1,0 +1,194 @@
+.page {
+  min-height: 100vh;
+  background: var(--accent);
+}
+
+.header {
+  padding: 40px 0;
+}
+
+.stats {
+  margin-bottom: 30px;
+}
+
+.rewardInfo {
+  display: flex;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+.rewardInfo strong {
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.tab, .tabActive {
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.tab { background: white; color: #666; }
+.tabActive { background: var(--primary); color: white; }
+
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 80px;
+}
+
+.reviewCard {
+  padding: 25px;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.stars {
+  color: #FFD700;
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+
+.college {
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.verifiedBadge {
+  margin-left: 10px;
+  background: #E8F5E9;
+  color: #2E7D32;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.date {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.productName {
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.reviewText {
+  color: var(--text-main);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tag {
+  background: var(--accent);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.reviewFooter {
+  display: flex;
+  gap: 20px;
+  border-top: 1px solid #EEE;
+  padding-top: 15px;
+}
+
+.upvoteBtn, .reportBtn {
+  background: transparent;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.upvoteBtn:hover { color: var(--primary); }
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.modal {
+  max-width: 450px;
+  width: 100%;
+  padding: 40px;
+  text-align: center;
+}
+
+.starRating {
+  font-size: 3rem;
+  margin: 20px 0;
+  color: #DDD;
+}
+
+.bigStar:hover { color: #FFD700; cursor: pointer; }
+
+.tagSelector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tagBtn {
+  background: #F1F5F9;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.commentBox {
+  width: 100%;
+  height: 80px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #EEE;
+  margin-bottom: 20px;
+}
+
+.modalActions {
+  display: flex;
+  gap: 15px;
+}
+
+.modalActions button {
+  flex: 1;
+}
+
+.btnSkip {
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+}

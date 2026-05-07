@@ -1,0 +1,203 @@
+.page {
+  min-height: 100vh;
+  background: #0A0A0A;
+  color: white;
+}
+
+.header {
+  padding: 60px 0 40px;
+  text-align: center;
+}
+
+.timeWarning {
+  margin-top: 20px;
+  background: rgba(255, 165, 0, 0.1);
+  color: orange;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.feeInfo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.feeBadge {
+  background: #FFEBEE;
+  color: var(--alert);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.primeFree {
+  color: #2E7D32;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.productWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quickAdd {
+  width: 100%;
+  padding: 10px;
+  background: var(--alert);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.modalOverlay, .safetyOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.confirmModal, .safetyPopup {
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+}
+
+.inputGroup {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.inputGroup label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #EEE;
+}
+
+.modalActions, .safetyButtons {
+  display: flex;
+  gap: 15px;
+}
+
+.modalActions button, .safetyButtons button {
+  flex: 1;
+}
+
+.btnCancel {
+  background: #F1F5F9;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+.btnSafe {
+  background: #4CAF50;
+  color: white;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+
+.btnIssue {
+  background: #F44336;
+  color: white;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+
+.sosPulsingIcon {
+  font-size: 3rem;
+  animation: iconPulse 1.5s infinite;
+}
+
+@keyframes iconPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0px var(--alert)); }
+  50% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--alert)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0px var(--alert)); }
+}
+
+.emergencyCatalog {
+  margin-top: 40px;
+}
+
+.catalogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.deliveryEta {
+  background: #1A1A1A;
+  color: #4CAF50;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  border: 1px solid #4CAF5040;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.safetyInfo {
+  margin-top: 80px;
+  padding-bottom: 60px;
+}
+
+.safetyCard {
+  background: #1A1A1A;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.safetyCard h3 {
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.safetyCard p {
+  color: #AAA;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .catalogHeader {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

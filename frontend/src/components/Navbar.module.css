@@ -1,0 +1,116 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-poppins);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+}
+
+.logo span {
+  color: var(--secondary);
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.pointsPill {
+  background: var(--accent);
+  padding: 6px 16px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.pointsIcon {
+  font-size: 1.1rem;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navIcon {
+  color: var(--text-main);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navIcon:hover {
+  color: var(--primary);
+}
+
+.cartBadge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: var(--secondary);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+.profileLink {
+  margin-left: 10px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(61, 44, 141, 0.2);
+}
+
+@media (max-width: 768px) {
+  .center {
+    display: none;
+  }
+  
+  .right {
+    gap: 15px;
+  }
+}

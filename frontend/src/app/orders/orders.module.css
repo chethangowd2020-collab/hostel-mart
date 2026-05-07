@@ -1,0 +1,136 @@
+.page {
+  min-height: 100vh;
+  background: var(--accent);
+}
+
+.header {
+  padding: 40px 0;
+}
+
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.orderCard {
+  padding: 25px;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding-bottom: 15px;
+}
+
+.orderId {
+  display: block;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.orderDate {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.statusBadge {
+  background: #E8F5E9;
+  color: #2E7D32;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.orderContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.itemsSummary h4 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.itemsSummary p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.orderTotal {
+  text-align: right;
+}
+
+.orderTotal small {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.orderTotal strong {
+  font-size: 1.3rem;
+  color: var(--text-main);
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+}
+
+.actions button {
+  flex: 1;
+}
+
+.btnSecondary {
+  background: #F1F5F9;
+  color: #1E293B;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+.usualsSection {
+  padding-bottom: 80px;
+}
+
+.usualsSection h2 {
+  margin-bottom: 25px;
+}
+
+.usualsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.usualItem {
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.usualIcon {
+  font-size: 2rem;
+}
+
+.addBtn {
+  background: var(--primary-hover);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}

@@ -1,0 +1,237 @@
+.page {
+  min-height: 100vh;
+  background: var(--accent);
+  padding-bottom: 80px;
+}
+
+.header {
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  color: var(--text-main);
+}
+
+.editBtn {
+  background: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.editBtn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 30px;
+}
+
+.studentCard {
+  background: linear-gradient(135deg, #3D2C8D 0%, #1e1b4b 100%);
+  border-radius: 24px;
+  padding: 30px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(61, 44, 141, 0.3);
+  margin-bottom: 30px;
+}
+
+.studentCard::after {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.avatarLarge {
+  width: 80px;
+  height: 80px;
+  background: var(--secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.nameInfo h2 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.nameInfo p {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.primeBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255,215,0,0.2);
+  border: 1px solid rgba(255,215,0,0.3);
+  color: #FFD700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cardDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detailRow {
+  display: flex;
+  gap: 40px;
+}
+
+.detailItem label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.5;
+  margin-bottom: 6px;
+}
+
+.detailItem p {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.cardFooter {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.memberSince {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+.loyaltyStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.statBox {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.statBox h3 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.statBox p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.actionCard {
+  padding: 30px;
+  margin-bottom: 25px;
+}
+
+.actionLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.actionLink {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 500;
+}
+
+.actionLink:hover {
+  background: var(--accent);
+}
+
+.actionLink span {
+  font-size: 1.2rem;
+}
+
+.promoCard {
+  background: var(--secondary);
+  padding: 30px;
+  border-radius: 24px;
+  color: white;
+  text-align: center;
+}
+
+.promoCard h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.promoCard p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.referBtn {
+  width: 100%;
+  background: white;
+  color: var(--secondary);
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .profileGrid {
+    grid-template-columns: 1fr;
+  }
+}
