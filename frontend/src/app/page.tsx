@@ -55,10 +55,10 @@ const CATEGORIES = [
 ];
 
 const SOS_PRODUCTS = [
-  { id: 's1', name: 'Dolo 650', price: 30, originalPrice: 35, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400', category: 'Emergency SOS', stock: 20 },
-  { id: 's2', name: 'ORS Sachet', price: 12, image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=400', category: 'Emergency SOS', stock: 30 },
   { id: 's3', name: 'Type-C Cable', price: 149, originalPrice: 199, image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=400', category: 'Electronics', stock: 10 },
   { id: 's4', name: 'Instant Coffee', price: 8, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=400', category: 'Study Fuel', stock: 50 },
+  { id: 's5', name: 'Lightning Cable', price: 199, image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=400', category: 'Electronics', stock: 15 },
+  { id: 's6', name: 'Toothbrush', price: 40, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400', category: 'Personal Care', stock: 20 },
 ];
 
 const QUICK_MEALS = [
