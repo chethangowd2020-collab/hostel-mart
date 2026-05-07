@@ -23,7 +23,16 @@ export default function ProductCard({ product }: { product: ProductProps }) {
   return (
     <div className={`${styles.card} card`}>
       <div className={styles.imageContainer}>
-        <img src={product.image} alt={product.name} className={styles.image} />
+        <img
+          src={product.image}
+          alt={product.name}
+          className={styles.image}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src = `https://placehold.co/400x300/1e1b4b/ffffff?text=${encodeURIComponent(product.name.slice(0, 15))}`;
+          }}
+        />
         <button className={styles.wishlistBtn} aria-label="Add to wishlist">
           ❤️
         </button>

@@ -149,7 +149,15 @@ export default function Home() {
           <div className={styles.usualsRow}>
             {MOCK_USUALS.map((item) => (
               <div key={item.id} className={`${styles.usualCard} card`}>
-                <img src={item.image} alt={item.name} />
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  onError={(e) => {
+                    const t = e.target as HTMLImageElement;
+                    t.onerror = null;
+                    t.src = `https://placehold.co/200x200/1e1b4b/ffffff?text=${encodeURIComponent(item.name.slice(0,10))}`;
+                  }}
+                />
                 <h4>{item.name}</h4>
                 <p>{item.orders} times ordered</p>
                 <button className={styles.reorderBtnSmall}>+ Add</button>
