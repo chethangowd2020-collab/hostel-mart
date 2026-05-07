@@ -1,0 +1,66 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--background);
+  padding-bottom: 100px;
+}
+
+.main {
+  padding-top: 80px;
+}
+
+.header {
+  background: linear-gradient(135deg, #FF2D2D 0%, #D32F2F 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.header p {
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.sectionHeader h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.badge {
+  background: rgba(255,45,45,0.1);
+  color: #FF2D2D;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+@media (min-width: 768px) {
+  .productGrid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+}

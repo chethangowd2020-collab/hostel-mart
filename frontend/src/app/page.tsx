@@ -45,6 +45,7 @@ const COMBOS = [
 
 const CATEGORIES = [
   { name: 'Emergency SOS', emoji: '🚨', color: '#FF2D2D' },
+  { name: 'Medical', emoji: '🏥', color: '#E53935' },
   { name: 'Quick Meals', emoji: '🍜', color: '#FF6B2C' },
   { name: 'Study Fuel', emoji: '☕', color: '#3D2C8D' },
   { name: 'Stationery', emoji: '✏️', color: '#2196F3' },
@@ -270,10 +271,15 @@ export default function Home() {
           <div className={styles.sectionHeader}><h2>Explore Categories</h2></div>
           <div className={styles.categoriesGrid}>
             {CATEGORIES.map(cat => (
-              <div key={cat.name} className={styles.categoryCard} style={{ borderBottom: `3px solid ${cat.color}` }}>
+              <Link 
+                href={cat.name === 'Medical' ? '/medical' : '#'} 
+                key={cat.name} 
+                className={styles.categoryCard} 
+                style={{ borderBottom: `3px solid ${cat.color}`, textDecoration: 'none' }}
+              >
                 <div className={styles.catEmoji}>{cat.emoji}</div>
                 <span>{cat.name}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
