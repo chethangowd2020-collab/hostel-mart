@@ -228,6 +228,46 @@ export default function Home() {
             ))}
           </div>
         </section>
+        {/* FEATURE 10 — Expiring Soon (Sustainability) */}
+        <section className="container" style={{ marginTop: '50px', marginBottom: '80px' }}>
+          <div className={styles.sectionHeader}>
+            <div className={styles.headerLeft}>
+              <h2>Expiring Soon — Heavy Discounts 🌿</h2>
+              <span className={styles.badgeGreen}>Eco-Saver Mode</span>
+            </div>
+            <span className={styles.incentiveText}>Earn 1.5X Loyalty Points!</span>
+          </div>
+          <div className={styles.productGrid}>
+            <ProductCard 
+              product={{
+                id: 'exp1',
+                name: 'Amul Milk 1L',
+                price: 21,
+                originalPrice: 72,
+                image: 'https://images.unsplash.com/photo-1563636619-e9107da5a1bb?q=80&w=1000',
+                category: 'Groceries',
+                stock: 8,
+                daysToExpiry: 1,
+                expiryDate: '09 May 2026',
+                discount: 70
+              }} 
+            />
+            <ProductCard 
+              product={{
+                id: 'exp2',
+                name: 'Britannia Bread',
+                price: 25,
+                originalPrice: 50,
+                image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1000',
+                category: 'Food',
+                stock: 12,
+                daysToExpiry: 3,
+                expiryDate: '11 May 2026',
+                discount: 50
+              }} 
+            />
+          </div>
+        </section>
       </main>
 
       {/* Floating SOS Button */}

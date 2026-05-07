@@ -23,11 +23,20 @@ export default function ProductCard({ product }: { product: ProductProps }) {
         {product.stock <= 0 && <span className={styles.oosBadge}>Out of Stock</span>}
         {product.stock > 0 && product.stock < 10 && <span className={styles.lowStockBadge}>Only {product.stock} left!</span>}
         {product.isTrending && <span className={styles.trendingBadge}>🔥 Trending</span>}
+        {product.daysToExpiry && (
+          <span className={styles.expiryBadge}>
+            🕒 {product.daysToExpiry} days left
+          </span>
+        )}
       </div>
       
       <div className={styles.content}>
-        <div className={styles.category}>{product.category}</div>
+        <div className={styles.categoryRow}>
+          <span className={styles.category}>{product.category}</span>
+          {product.daysToExpiry && <span className={styles.ecoIncentive}>1.5X Points 🌿</span>}
+        </div>
         <h3 className={styles.name}>{product.name}</h3>
+        {product.expiryDate && <p className={styles.expiryDate}>Expires: {product.expiryDate}</p>}
         
         <div className={styles.footer}>
           <div className={styles.priceSection}>
