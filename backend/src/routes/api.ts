@@ -24,6 +24,7 @@ router.post('/orders/confirm-safety', confirmSafety);
 
 // Users
 router.get('/users/profile/:id', getProfile);
+router.post('/users/update-profile', updateProfile);
 router.post('/users/sync-college', updateCollege);
 router.post('/users/prime-upgrade', upgradeToPrime);
 

@@ -4,11 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './login.module.css';
 
-const COLLEGES = [
-  "IIT Bombay", "IIT Delhi", "IIT Madras", "BITS Pilani", 
-  "VIT Vellore", "MIT Manipal", "SRM University", "Amity University"
-];
-
 export default function Login() {
   const router = useRouter();
   const [step, setStep] = useState(1); // 1: Phone, 2: OTP, 3: Profile Setup
@@ -16,9 +11,11 @@ export default function Login() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [userId, setUserId] = useState('');
+  
   const [profile, setProfile] = useState({
     name: '',
-    college: '',
+    college: 'SJBIT', // Defaulted to SJBIT as requested
     hostel: '',
     room: ''
   });
@@ -36,10 +33,10 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone }),
       });
-      const data = await res.json();
       if (res.ok) {
         setStep(2);
       } else {
+        const data = await res.json();
         setError(data.error || 'Failed to send OTP');
       }
     } catch (err) {
@@ -74,10 +71,12 @@ export default function Login() {
       });
       const data = await res.json();
       if (res.ok) {
+        setUserId(data.user?.id || 'temp-id'); // In a real app, verify-otp would return the user
         if (data.isNewUser) {
           setStep(3);
         } else {
-          // Success: Logged in
+          // Store user session (localStorage for demo)
+          localStorage.setItem('user', JSON.stringify(data.user));
           router.push('/');
         }
       } else {
@@ -92,8 +91,33 @@ export default function Login() {
 
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, we'd call an API like /api/users/profile
-    router.push('/');
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch(`${apiUrl}/users/update-profile`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          studentId: userId,
+          name: profile.name,
+          collegeName: profile.college,
+          hostel: profile.hostel,
+          room: profile.room
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('user', JSON.stringify(data));
+        router.push('/profile');
+      } else {
+        setError(data.error || 'Failed to save profile');
+      }
+    } catch (err) {
+      setError('Failed to connect to server.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -181,6 +205,7 @@ export default function Login() {
                 required
                 value={profile.name}
                 onChange={(e) => setProfile({...profile, name: e.target.value})}
+                disabled={loading}
               />
             </div>
 
@@ -189,25 +214,27 @@ export default function Login() {
               <select 
                 required
                 value={profile.college}
+                disabled // Locked to SJBIT as requested
                 onChange={(e) => setProfile({...profile, college: e.target.value})}
               >
-                <option value="">Select College</option>
-                {COLLEGES.map(c => <option key={c} value={c}>{c}</option>)}
+                <option value="SJBIT">SJBIT</option>
               </select>
             </div>
 
             <div className={styles.row}>
               <div className={styles.inputGroup}>
                 <label>Hostel Name</label>
-                <input type="text" placeholder="Block B" required value={profile.hostel} onChange={(e) => setProfile({...profile, hostel: e.target.value})} />
+                <input type="text" placeholder="Block B" required value={profile.hostel} onChange={(e) => setProfile({...profile, hostel: e.target.value})} disabled={loading} />
               </div>
               <div className={styles.inputGroup} style={{ width: '100px' }}>
                 <label>Room #</label>
-                <input type="text" placeholder="304" required value={profile.room} onChange={(e) => setProfile({...profile, room: e.target.value})} />
+                <input type="text" placeholder="304" required value={profile.room} onChange={(e) => setProfile({...profile, room: e.target.value})} disabled={loading} />
               </div>
             </div>
 
-            <button type="submit" className="btn-primary">Start Shopping</button>
+            <button type="submit" className="btn-primary" disabled={loading}>
+              {loading ? 'Saving Profile...' : 'Start Shopping'}
+            </button>
           </form>
         )}
       </div>
