@@ -5,95 +5,102 @@ import Navbar from '@/components/Navbar';
 import ProductCard from '@/components/ProductCard';
 import styles from './sos.module.css';
 
-const SOS_PRODUCTS = [
-  {
-    id: 's1',
-    name: 'Sanitary Pads - Ultra Thin (Pack of 10)',
-    price: 145,
-    originalPrice: 160,
-    image: 'https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?q=80&w=1000',
-    category: 'Essentials',
-    isSOS: true
-  },
-  {
-    id: 's2',
-    name: 'Crocin Pain Relief - 15 Tablets',
-    price: 35,
-    originalPrice: 40,
-    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1000',
-    category: 'Medicines',
-    isSOS: true
-  },
-  {
-    id: 's3',
-    name: 'Instant Noodles Party Pack (5+1)',
-    price: 75,
-    originalPrice: 85,
-    image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=1000',
-    category: 'Food',
-    isSOS: true
-  },
-  {
-    id: 's4',
-    name: 'Charge-N-Go Universal Cable',
-    price: 299,
-    originalPrice: 499,
-    image: 'https://images.unsplash.com/photo-1588503080517-8e7c10b7b137?q=80&w=1000',
-    category: 'Electronics',
-    isSOS: true
-  }
+const SOS_CATALOG = [
+  { id: 'sos1', name: 'Whisper Ultra Sanitary Pads (Pack of 7)', price: 95, originalPrice: 105, image: 'https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?q=80&w=1000', category: 'Hygiene' },
+  { id: 'sos2', name: 'Dolo 650 - Strip of 15', price: 32, originalPrice: 35, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1000', category: 'Medicines' },
+  { id: 'sos3', name: 'USB-C Fast Charging Cable (1m)', price: 349, originalPrice: 499, image: 'https://images.unsplash.com/photo-1588503080517-8e7c10b7b137?q=80&w=1000', category: 'Electronics' },
+  { id: 'sos4', name: 'Maggi Cup Noodles - Masala', price: 50, originalPrice: 50, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=1000', category: 'Food' },
+  { id: 'sos5', name: 'Red Bull Energy Drink (250ml)', price: 115, originalPrice: 125, image: 'https://images.unsplash.com/photo-1622543953490-3b7bc4b39c65?q=80&w=1000', category: 'Drinks' },
+  { id: 'sos6', name: 'Eveready AA Batteries (4 Pack)', price: 80, originalPrice: 90, image: 'https://images.unsplash.com/photo-1590059521360-ec535f299159?q=80&w=1000', category: 'Hardware' }
 ];
 
 export default function SOSPage() {
   const [isAvailable, setIsAvailable] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [safetyCheck, setSafetyCheck] = useState(false);
 
   useEffect(() => {
-    const checkAvailability = () => {
+    const checkTime = () => {
       const hours = new Date().getHours();
-      // Available 10 PM (22) to 6 AM (6)
       setIsAvailable(hours >= 22 || hours < 6);
     };
-    checkAvailability();
-    const interval = setInterval(checkAvailability, 60000);
-    return () => clearInterval(interval);
+    checkTime();
+    const timer = setInterval(checkTime, 60000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
     <div className={styles.page}>
       <Navbar />
       <main className="container">
-        <div className={styles.header}>
-          <div className={styles.sosTitleGroup}>
-            <div className={styles.sosPulse}></div>
-            <h1>SOS Midnight Delivery</h1>
-          </div>
-          <p>Available 10 PM – 6 AM for your urgent needs.</p>
+        <div className={styles.hero}>
+          <div className={styles.sosPulsingIcon}>🚨</div>
+          <h1>Midnight SOS</h1>
+          <p>Delivery in <strong>45 Mins</strong>. Bypasses all standard orders.</p>
           {!isAvailable && (
-            <div className={styles.alert}>
-              ⚠️ Currently outside SOS hours. Orders will be processed as standard delivery.
+            <div className={styles.timeWarning}>
+              ⚠️ SOS is active between 10 PM - 6 AM. Currently inactive.
             </div>
           )}
         </div>
 
-        <section className={styles.emergencyCatalog}>
+        <section className={styles.catalogSection}>
           <div className={styles.catalogHeader}>
-            <h2>Emergency Catalog</h2>
-            <span className={styles.deliveryEta}>🚀 Delivery in 10-15 mins</span>
+            <h2>Urgent Catalog</h2>
+            <div className={styles.feeInfo}>
+              <span className={styles.feeBadge}>Fee: ₹25</span>
+              <span className={styles.primeFree}>Free for Prime</span>
+            </div>
           </div>
           
           <div className={styles.productGrid}>
-            {SOS_PRODUCTS.map((product) => (
-              <ProductCard key={product.id} product={{...product, isExpiringSoon: false}} />
+            {SOS_CATALOG.map(product => (
+              <div key={product.id} className={styles.productWrapper}>
+                <ProductCard product={product} />
+                <button 
+                  className={styles.quickAdd}
+                  onClick={() => setShowConfirm(true)}
+                >
+                  Urgent Add
+                </button>
+              </div>
             ))}
           </div>
         </section>
 
-        <section className={styles.safetyInfo}>
-          <div className={styles.safetyCard}>
-            <h3>Safety First</h3>
-            <p>Our delivery partners are verified and follow strict safety protocols during late-night deliveries.</p>
+        {/* Room/Gate Confirmation Modal */}
+        {showConfirm && (
+          <div className={styles.modalOverlay}>
+            <div className={`${styles.confirmModal} card`}>
+              <h3>Confirm Delivery Details</h3>
+              <p>For SOS orders, please re-verify your location for maximum speed.</p>
+              <div className={styles.inputGroup}>
+                <label>Hostel Gate Details / Room #</label>
+                <input type="text" placeholder="e.g., Gate 2, Room B-304" />
+              </div>
+              <div className={styles.modalActions}>
+                <button className={styles.btnCancel} onClick={() => setShowConfirm(false)}>Cancel</button>
+                <button className="btn-primary" onClick={() => { setShowConfirm(false); setSafetyCheck(true); }}>
+                  Place SOS Order
+                </button>
+              </div>
+            </div>
           </div>
-        </section>
+        )}
+
+        {/* Safety Confirmation Popup (Simulated post-delivery) */}
+        {safetyCheck && (
+          <div className={styles.safetyOverlay}>
+            <div className={`${styles.safetyPopup} card`}>
+              <h2>Order Arrived?</h2>
+              <p>Did your SOS order arrive safely?</p>
+              <div className={styles.safetyButtons}>
+                <button className={styles.btnSafe} onClick={() => setSafetyCheck(false)}>Yes, Safely</button>
+                <button className={styles.btnIssue} onClick={() => setSafetyCheck(false)}>Report Issue</button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
