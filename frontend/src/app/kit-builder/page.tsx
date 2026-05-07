@@ -4,7 +4,25 @@ import { useState, useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import styles from './kit-builder.module.css';
 
-const KITS = [
+interface KitItem {
+  id: string;
+  name: string;
+  price: number;
+  mandatory: boolean;
+  category: string;
+  brands?: string[];
+}
+
+interface Kit {
+  id: string;
+  name: string;
+  tagline: string;
+  discount: number;
+  discreetPackaging?: boolean;
+  items: KitItem[];
+}
+
+const KITS: Kit[] = [
   {
     id: 'exam',
     name: 'Exam Kit',
@@ -25,7 +43,7 @@ const KITS = [
   },
   {
     id: 'women',
-    name: 'Women\'s Essentials Kit',
+    name: "Women's Essentials Kit",
     tagline: 'Your comfort kit, delivered with care.',
     discount: 0.12,
     discreetPackaging: true,
@@ -68,7 +86,7 @@ const KITS = [
 export default function KitBuilderPage() {
   const [activeKitId, setActiveKitId] = useState(KITS[0].id);
   const [selectedItems, setSelectedItems] = useState<{ [key: string]: { selected: boolean, qty: number, brand?: string } }>(() => {
-    const initial: any = {};
+    const initial: { [key: string]: { selected: boolean, qty: number, brand?: string } } = {};
     KITS.forEach(kit => {
       kit.items.forEach(item => {
         initial[item.id] = { selected: item.mandatory, qty: 1, brand: item.brands ? item.brands[0] : undefined };
