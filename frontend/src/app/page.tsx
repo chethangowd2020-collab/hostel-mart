@@ -13,32 +13,32 @@ const HERO_SLIDES = [
 ];
 
 const MOCK_USUALS = [
-  { id: 'u1', name: 'Maggi Cup', orders: 24, price: 30, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=400' },
-  { id: 'u2', name: 'Nescafe Sachet', orders: 18, price: 8, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=400' },
-  { id: 'u3', name: 'Oreo Pack', orders: 15, price: 30, image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=400' },
-  { id: 'u4', name: 'Dark Chocolate', orders: 12, price: 55, image: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?q=80&w=400' },
-  { id: 'u5', name: 'Energy Drink', orders: 10, price: 120, image: 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?q=80&w=400' },
-  { id: 'u6', name: 'Pen Pack', orders: 9, price: 25, image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=400' },
-  { id: 'u8', name: 'Cup Noodles', orders: 6, price: 35, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=400' },
+  { id: 'u1', name: 'Maggi Cup', orders: 24, price: 35, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=400&auto=format&fit=crop&q=60' },
+  { id: 'u2', name: 'Nescafe Sachet', orders: 18, price: 10, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&auto=format&fit=crop&q=60' },
+  { id: 'u3', name: 'Oreo Pack', orders: 15, price: 40, image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&auto=format&fit=crop&q=60' },
+  { id: 'u4', name: 'Dark Chocolate', orders: 12, price: 65, image: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&auto=format&fit=crop&q=60' },
+  { id: 'u5', name: 'Energy Drink', orders: 10, price: 125, image: 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=400&auto=format&fit=crop&q=60' },
+  { id: 'u6', name: 'Pen Pack', orders: 9, price: 30, image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=400&auto=format&fit=crop&q=60' },
+  { id: 'u8', name: 'Cup Noodles', orders: 6, price: 40, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=400&auto=format&fit=crop&q=60' },
 ];
 
 const FORGOT_ITEMS = [
-  { id: 'f1', name: 'Toothbrush', emoji: '🪥', price: 40 },
-  { id: 'f2', name: 'Toothpaste', emoji: '🦷', price: 55 },
-  { id: 'f4', name: 'Pen', emoji: '✏️', price: 10 },
-  { id: 'f5', name: 'Notebook', emoji: '📓', price: 45 },
-  { id: 'f6', name: 'Deodorant', emoji: '💨', price: 99 },
-  { id: 'f7', name: 'Soap', emoji: '🧼', price: 35 },
-  { id: 'f8', name: 'Razor', emoji: '🪒', price: 79 },
-  { id: 'f9', name: 'Cup Noodles', emoji: '🍜', price: 35 },
-  { id: 'f10', name: 'Coffee', emoji: '☕', price: 8 },
+  { id: 'f1', name: 'Toothbrush', emoji: '🪥', price: 45 },
+  { id: 'f2', name: 'Toothpaste', emoji: '🦷', price: 65 },
+  { id: 'f4', name: 'Pen', emoji: '✏️', price: 15 },
+  { id: 'f5', name: 'Notebook', emoji: '📓', price: 50 },
+  { id: 'f6', name: 'Deodorant', emoji: '💨', price: 110 },
+  { id: 'f7', name: 'Soap', emoji: '🧼', price: 40 },
+  { id: 'f8', name: 'Razor', emoji: '🪒', price: 85 },
+  { id: 'f9', name: 'Cup Noodles', emoji: '🍜', price: 40 },
+  { id: 'f10', name: 'Coffee', emoji: '☕', price: 10 },
 ];
 
 const COMBOS = [
-  { id: 'c1', name: 'Study Survival Combo', items: 'Coffee + Maggi + Dark Chocolate + Pen', price: 89, badge: '🎓', color: '#3D2C8D' },
-  { id: 'c2', name: 'Midnight Rescue Combo', items: 'Noodles + Coffee + Chips + Energy Drink', price: 149, badge: '🌙', color: '#FF2D2D' },
-  { id: 'c3', name: 'Exam Rush Combo', items: 'Pen Pack + Sticky Notes + Coffee + Chocolate', price: 99, badge: '📝', color: '#FF6B2C' },
-  { id: 'c4', name: 'Freshers Essentials Combo', items: 'Bucket + Mug + Lock + Hangers', price: 349, badge: '🎒', color: '#4CAF50' },
+  { id: 'c1', name: 'Study Survival Combo', items: 'Coffee + Maggi + Dark Chocolate + Pen', price: 125, badge: '🎓', color: '#3D2C8D' },
+  { id: 'c2', name: 'Midnight Rescue Combo', items: 'Noodles + Coffee + Chips + Energy Drink', price: 185, badge: '🌙', color: '#FF2D2D' },
+  { id: 'c3', name: 'Exam Rush Combo', items: 'Pen Pack + Sticky Notes + Coffee + Chocolate', price: 145, badge: '📝', color: '#FF6B2C' },
+  { id: 'c4', name: 'Freshers Essentials Combo', items: 'Bucket + Mug + Lock + Hangers', price: 399, badge: '🎒', color: '#4CAF50' },
 ];
 
 const CATEGORIES = [
@@ -53,31 +53,31 @@ const CATEGORIES = [
 ];
 
 const SOS_PRODUCTS = [
-  { id: 's4', name: 'Instant Coffee', price: 8, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=400', category: 'Study Fuel', stock: 50 },
-  { id: 's6', name: 'Toothbrush', price: 40, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400', category: 'Personal Care', stock: 20 },
-  { id: 's7', name: 'Sanitary Pads (XL)', price: 90, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400', category: "Women's Essentials", stock: 30 },
-  { id: 's8', name: 'Bathing Soap', price: 35, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400', category: 'Personal Care', stock: 40 },
+  { id: 's4', name: 'Instant Coffee', price: 10, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&auto=format&fit=crop&q=60', category: 'Study Fuel', stock: 50 },
+  { id: 's6', name: 'Toothbrush', price: 45, image: 'https://images.unsplash.com/photo-1607619056574-7b4d1937de81?w=400&auto=format&fit=crop&q=60', category: 'Personal Care', stock: 20 },
+  { id: 's7', name: 'Sanitary Pads (XL)', price: 95, image: 'https://images.unsplash.com/photo-1605649487212-47bdab064f73?w=400&auto=format&fit=crop&q=60', category: "Women's Essentials", stock: 30 },
+  { id: 's8', name: 'Bathing Soap', price: 40, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60', category: 'Personal Care', stock: 40 },
 ];
 
 const QUICK_MEALS = [
-  { id: 'm1', name: 'Cup Noodles', price: 35, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=400', category: 'Quick Meals', stock: 25, isTrending: true },
-  { id: 'm2', name: 'Ready Pasta Cup', price: 55, originalPrice: 70, image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=400', category: 'Quick Meals', stock: 15 },
-  { id: 'm3', name: 'Frozen Momos (8pc)', price: 89, image: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=400', category: 'Quick Meals', stock: 10, isTrending: true },
-  { id: 'm4', name: 'Instant Oats Cup', price: 45, originalPrice: 60, image: 'https://images.unsplash.com/photo-1574282565770-7a618b08b1a8?q=80&w=400', category: 'Quick Meals', stock: 20 },
+  { id: 'm1', name: 'Cup Noodles', price: 40, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=400&auto=format&fit=crop&q=60', category: 'Quick Meals', stock: 25, isTrending: true },
+  { id: 'm2', name: 'Ready Pasta Cup', price: 65, originalPrice: 80, image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&auto=format&fit=crop&q=60', category: 'Quick Meals', stock: 15 },
+  { id: 'm3', name: 'Frozen Momos (8pc)', price: 99, image: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=400&auto=format&fit=crop&q=60', category: 'Quick Meals', stock: 10, isTrending: true },
+  { id: 'm4', name: 'Instant Oats Cup', price: 55, originalPrice: 70, image: 'https://images.unsplash.com/photo-1574282565770-7a618b08b1a8?w=400&auto=format&fit=crop&q=60', category: 'Quick Meals', stock: 20 },
 ];
 
 const STUDY_FUEL = [
-  { id: 'sf1', name: 'Red Bull Energy', price: 120, image: 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?q=80&w=400', category: 'Study Fuel', stock: 20, isTrending: true },
-  { id: 'sf2', name: 'Dark Chocolate Bar', price: 55, image: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?q=80&w=400', category: 'Study Fuel', stock: 30 },
-  { id: 'sf3', name: 'Nescafe Sachet 5pk', price: 35, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=400', category: 'Study Fuel', stock: 50 },
-  { id: 'sf4', name: 'Protein Bar', price: 85, originalPrice: 99, image: 'https://images.unsplash.com/photo-1517093602195-b40af9688466?q=80&w=400', category: 'Study Fuel', stock: 15 },
+  { id: 'sf1', name: 'Red Bull Energy', price: 125, image: 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=400&auto=format&fit=crop&q=60', category: 'Study Fuel', stock: 20, isTrending: true },
+  { id: 'sf2', name: 'Dark Chocolate Bar', price: 65, image: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&auto=format&fit=crop&q=60', category: 'Study Fuel', stock: 30 },
+  { id: 'sf3', name: 'Nescafe Sachet 5pk', price: 45, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&auto=format&fit=crop&q=60', category: 'Study Fuel', stock: 50 },
+  { id: 'sf4', name: 'Protein Bar', price: 95, originalPrice: 120, image: 'https://images.unsplash.com/photo-1517093602195-b40af9688466?w=400&auto=format&fit=crop&q=60', category: 'Study Fuel', stock: 15 },
 ];
 
 const EXPIRING_SOON = [
-  { id: 'e1', name: 'Yogurt Cup', price: 20, originalPrice: 45, image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=400', category: 'Quick Meals', stock: 8, daysToExpiry: 1, expiryDate: '09 May 2026', discount: 55 },
-  { id: 'e2', name: 'Fresh Sandwich', price: 35, originalPrice: 80, image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=400', category: 'Quick Meals', stock: 5, daysToExpiry: 1, expiryDate: '09 May 2026', discount: 56 },
-  { id: 'e3', name: 'Cold Coffee', price: 30, originalPrice: 65, image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=400', category: 'Study Fuel', stock: 6, daysToExpiry: 2, expiryDate: '10 May 2026', discount: 53 },
-  { id: 'e4', name: 'Pastry Box', price: 40, originalPrice: 90, image: 'https://images.unsplash.com/photo-1587668178277-295251f900ce?q=80&w=400', category: 'Quick Meals', stock: 4, daysToExpiry: 2, expiryDate: '10 May 2026', discount: 55 },
+  { id: 'e1', name: 'Yogurt Cup', price: 25, originalPrice: 50, image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&auto=format&fit=crop&q=60', category: 'Quick Meals', stock: 8, daysToExpiry: 1, expiryDate: '09 May 2026', discount: 50 },
+  { id: 'e2', name: 'Fresh Sandwich', price: 45, originalPrice: 90, image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&auto=format&fit=crop&q=60', category: 'Quick Meals', stock: 5, daysToExpiry: 1, expiryDate: '09 May 2026', discount: 50 },
+  { id: 'e3', name: 'Cold Coffee', price: 35, originalPrice: 75, image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&auto=format&fit=crop&q=60', category: 'Study Fuel', stock: 6, daysToExpiry: 2, expiryDate: '10 May 2026', discount: 53 },
+  { id: 'e4', name: 'Pastry Box', price: 45, originalPrice: 100, image: 'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=400&auto=format&fit=crop&q=60', category: 'Quick Meals', stock: 4, daysToExpiry: 2, expiryDate: '10 May 2026', discount: 55 },
 ];
 
 const PAST_ORDERS = [

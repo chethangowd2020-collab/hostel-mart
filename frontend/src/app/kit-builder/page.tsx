@@ -29,16 +29,16 @@ const KITS: Kit[] = [
     tagline: 'Gear up for your exams. Everything in one box.',
     discount: 0.10,
     items: [
-      { id: 'e1', name: 'Ballpoint Pens (5 pack)', price: 50, mandatory: true, category: 'Stationery' },
-      { id: 'e2', name: 'Highlighters (4 colors)', price: 120, mandatory: false, category: 'Stationery' },
-      { id: 'e3', name: 'Sticky Notes (2 pads)', price: 80, mandatory: false, category: 'Stationery' },
-      { id: 'e4', name: 'A4 Ruled Notebook', price: 65, mandatory: true, category: 'Stationery' },
-      { id: 'e5', name: 'Geometry Box / Calculator', price: 250, mandatory: false, category: 'Stationery' },
-      { id: 'e6', name: 'Instant Coffee (5 pack)', price: 45, mandatory: true, category: 'Food' },
-      { id: 'e7', name: 'Dark Chocolate Bar', price: 100, mandatory: false, category: 'Food' },
-      { id: 'e8', name: 'Throat Lozenges', price: 30, mandatory: false, category: 'Health' },
-      { id: 'e9', name: 'Paracetamol Strip', price: 25, mandatory: false, category: 'Health' },
-      { id: 'e10', name: 'Ear Plugs', price: 150, mandatory: false, category: 'Health' }
+      { id: 'e1', name: 'Ballpoint Pens (5 pack)', price: 60, mandatory: true, category: 'Stationery' },
+      { id: 'e2', name: 'Highlighters (4 colors)', price: 145, mandatory: false, category: 'Stationery' },
+      { id: 'e3', name: 'Sticky Notes (2 pads)', price: 95, mandatory: false, category: 'Stationery' },
+      { id: 'e4', name: 'A4 Ruled Notebook', price: 75, mandatory: true, category: 'Stationery' },
+      { id: 'e5', name: 'Geometry Box / Calculator', price: 299, mandatory: false, category: 'Stationery' },
+      { id: 'e6', name: 'Instant Coffee (5 pack)', price: 55, mandatory: true, category: 'Food' },
+      { id: 'e7', name: 'Dark Chocolate Bar', price: 120, mandatory: false, category: 'Food' },
+      { id: 'e8', name: 'Throat Lozenges', price: 35, mandatory: false, category: 'Health' },
+      { id: 'e9', name: 'Paracetamol Strip', price: 30, mandatory: false, category: 'Health' },
+      { id: 'e10', name: 'Ear Plugs', price: 175, mandatory: false, category: 'Health' }
     ]
   },
   {
@@ -48,16 +48,16 @@ const KITS: Kit[] = [
     discount: 0.12,
     discreetPackaging: true,
     items: [
-      { id: 'w1', name: 'Sanitary Pads (10 pack)', price: 180, mandatory: true, category: 'Hygiene', brands: ['Whisper', 'Stayfree', 'Sofy'] },
-      { id: 'w2', name: 'Pantyliners (20 pack)', price: 120, mandatory: false, category: 'Hygiene' },
-      { id: 'w3', name: 'Pain Relief Roll-on', price: 95, mandatory: false, category: 'Health' },
-      { id: 'w4', name: 'Dark Chocolate (Comfort)', price: 160, mandatory: true, category: 'Food' },
-      { id: 'w5', name: 'Herbal Tea Bags (5 pack)', price: 75, mandatory: false, category: 'Food' },
-      { id: 'w6', name: 'Face Wash (Travel Size)', price: 55, mandatory: false, category: 'Hygiene' },
-      { id: 'w7', name: 'Moisturizer (Travel Size)', price: 65, mandatory: false, category: 'Hygiene' },
-      { id: 'w8', name: 'Period Underwear (3 pack)', price: 450, mandatory: false, category: 'Hygiene' },
-      { id: 'w9', name: 'Wet Wipes (20 pack)', price: 80, mandatory: true, category: 'Hygiene' },
-      { id: 'w10', name: 'Hair Ties (10 pack)', price: 40, mandatory: false, category: 'Accessories' }
+      { id: 'w1', name: 'Sanitary Pads (10 pack)', price: 199, mandatory: true, category: 'Hygiene', brands: ['Whisper', 'Stayfree', 'Sofy'] },
+      { id: 'w2', name: 'Pantyliners (20 pack)', price: 145, mandatory: false, category: 'Hygiene' },
+      { id: 'w3', name: 'Pain Relief Roll-on', price: 110, mandatory: false, category: 'Health' },
+      { id: 'w4', name: 'Dark Chocolate (Comfort)', price: 185, mandatory: true, category: 'Food' },
+      { id: 'w5', name: 'Herbal Tea Bags (5 pack)', price: 85, mandatory: false, category: 'Food' },
+      { id: 'w6', name: 'Face Wash (Travel Size)', price: 65, mandatory: false, category: 'Hygiene' },
+      { id: 'w7', name: 'Moisturizer (Travel Size)', price: 75, mandatory: false, category: 'Hygiene' },
+      { id: 'w8', name: 'Period Underwear (3 pack)', price: 499, mandatory: false, category: 'Hygiene' },
+      { id: 'w9', name: 'Wet Wipes (20 pack)', price: 95, mandatory: true, category: 'Hygiene' },
+      { id: 'w10', name: 'Hair Ties (10 pack)', price: 45, mandatory: false, category: 'Accessories' }
     ]
   },
   {
@@ -66,19 +66,19 @@ const KITS: Kit[] = [
     tagline: 'Move in ready. Everything a first-year needs.',
     discount: 0.15,
     items: [
-      { id: 's1', name: 'Bedsheet (Single)', price: 450, mandatory: true, category: 'Home' },
-      { id: 's2', name: 'Pillow Cover', price: 90, mandatory: true, category: 'Home' },
-      { id: 's3', name: 'Laundry Bag', price: 150, mandatory: false, category: 'Home' },
-      { id: 's4', name: 'Detergent Sachet (5 pack)', price: 50, mandatory: true, category: 'Home' },
-      { id: 's5', name: 'Bathroom Slippers', price: 199, mandatory: true, category: 'Apparel' },
-      { id: 's6', name: 'Towel (Medium)', price: 250, mandatory: false, category: 'Home' },
-      { id: 's7', name: 'Shampoo (Travel Size)', price: 45, mandatory: true, category: 'Hygiene' },
-      { id: 's8', name: 'Body Wash (Travel Size)', price: 55, mandatory: true, category: 'Hygiene' },
-      { id: 's9', name: 'Toothbrush + Paste Combo', price: 120, mandatory: true, category: 'Hygiene' },
-      { id: 's10', name: 'Extension Cord (1.5m)', price: 350, mandatory: false, category: 'Electronics' },
-      { id: 's11', name: 'Stationery Pack', price: 150, mandatory: false, category: 'Stationery' },
-      { id: 's12', name: 'Clothes Hangers (5 pack)', price: 80, mandatory: false, category: 'Home' },
-      { id: 's13', name: 'Combination Padlock', price: 299, mandatory: true, category: 'Hardware' }
+      { id: 's1', name: 'Bedsheet (Single)', price: 499, mandatory: true, category: 'Home' },
+      { id: 's2', name: 'Pillow Cover', price: 99, mandatory: true, category: 'Home' },
+      { id: 's3', name: 'Laundry Bag', price: 175, mandatory: false, category: 'Home' },
+      { id: 's4', name: 'Detergent Sachet (5 pack)', price: 60, mandatory: true, category: 'Home' },
+      { id: 's5', name: 'Bathroom Slippers', price: 225, mandatory: true, category: 'Apparel' },
+      { id: 's6', name: 'Towel (Medium)', price: 299, mandatory: false, category: 'Home' },
+      { id: 's7', name: 'Shampoo (Travel Size)', price: 55, mandatory: true, category: 'Hygiene' },
+      { id: 's8', name: 'Body Wash (Travel Size)', price: 65, mandatory: true, category: 'Hygiene' },
+      { id: 's9', name: 'Toothbrush + Paste Combo', price: 135, mandatory: true, category: 'Hygiene' },
+      { id: 's10', name: 'Extension Cord (1.5m)', price: 399, mandatory: false, category: 'Electronics' },
+      { id: 's11', name: 'Stationery Pack', price: 175, mandatory: false, category: 'Stationery' },
+      { id: 's12', name: 'Clothes Hangers (5 pack)', price: 95, mandatory: false, category: 'Home' },
+      { id: 's13', name: 'Combination Padlock', price: 329, mandatory: true, category: 'Hardware' }
     ]
   }
 ];
