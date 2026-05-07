@@ -2,6 +2,53 @@
   min-height: 100vh;
 }
 
+.calendarBanner {
+  background: linear-gradient(90deg, #3D2C8D 0%, #FF6B2C 100%);
+  color: white;
+  padding: 12px 0;
+}
+
+.bannerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.bannerInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.calendarIcon {
+  font-size: 1.4rem;
+  background: rgba(255,255,255,0.15);
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+}
+
+.bannerInfo strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.bannerInfo p {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.bannerCta {
+  background: white;
+  color: var(--primary);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
 .main {
   padding-bottom: 80px;
 }

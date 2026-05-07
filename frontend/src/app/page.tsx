@@ -61,6 +61,24 @@ export default function Home() {
       <Navbar />
       
       <main className={styles.main}>
+        {/* FEATURE 9 — Semester Calendar Banner */}
+        <section className={styles.calendarBanner}>
+          <div className="container">
+            <div className={styles.bannerContent}>
+              <div className={styles.bannerInfo}>
+                <span className={styles.calendarIcon}>📅</span>
+                <div>
+                  <strong>Exams start in 5 days</strong>
+                  <p>Get your study essentials and energy kits ready.</p>
+                </div>
+              </div>
+              <Link href="/kit-builder" className={styles.bannerCta}>
+                Shop Exam Essentials →
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Hero Carousel */}
         <section className={styles.hero}>
           <div className={styles.carousel}>
