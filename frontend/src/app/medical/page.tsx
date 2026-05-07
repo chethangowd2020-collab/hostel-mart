@@ -49,7 +49,6 @@ const MEDICAL_CATEGORIES = [
       { id: 'm20', name: 'Hot Gel Pack', price: 220, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60', category: 'Medical', stock: 10 },
     ]
   }
-  }
 ];
 
 export default function Medical() {
