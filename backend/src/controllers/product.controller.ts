@@ -35,7 +35,7 @@ export const registerRestockNotify = async (req: Request, res: Response) => {
     const { studentId, productId } = req.body;
     const notifier = await prisma.restockNotifier.create({
       data: {
-        userId: studentId,
+        studentId,
         productId,
       },
     });

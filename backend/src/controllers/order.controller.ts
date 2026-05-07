@@ -3,25 +3,29 @@ import prisma from '../services/prisma';
 
 export const createOrder = async (req: Request, res: Response) => {
   try {
-    const { studentId, items, total, isUrgent, roomDetails } = req.body;
+    const { studentId, vendorId, items, total, isUrgent, roomNumber, gateCode, deliveryAddress } = req.body;
     const order = await prisma.order.create({
       data: {
-        userId: studentId,
-        total,
-        status: 'PENDING',
-        isUrgent: isUrgent || false,
-        roomDetails: roomDetails || '',
+        studentId,
+        vendorId: vendorId || studentId, // fallback for demo
+        totalPrice: total,
+        deliveryAddress: deliveryAddress || 'Hostel Gate',
+        roomNumber: roomNumber || null,
+        gateCode: gateCode || null,
+        isSOS: isUrgent || false,
+        urgentFee: isUrgent ? 25 : 0,
         items: {
           create: items.map((item: any) => ({
             productId: item.productId,
             quantity: item.quantity,
-            price: item.price,
+            priceAtPurchase: item.price,
           })),
         },
       },
     });
     res.json(order);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to create order' });
   }
 };
@@ -30,7 +34,7 @@ export const getOrderHistory = async (req: Request, res: Response) => {
   try {
     const studentId = req.params['studentId'] as string;
     const orders = await prisma.order.findMany({
-      where: { userId: studentId },
+      where: { studentId },
       include: { items: { include: { product: true } } },
       orderBy: { createdAt: 'desc' },
     });
@@ -42,22 +46,16 @@ export const getOrderHistory = async (req: Request, res: Response) => {
 
 export const confirmSafety = async (req: Request, res: Response) => {
   try {
-    const { orderId, wasSafe, feedback } = req.body;
-    const safety = await prisma.safetyConfirmed.create({
+    const { orderId } = req.body;
+    // safetyConfirmed is a boolean field on the Order model
+    const order = await prisma.order.update({
+      where: { id: orderId },
       data: {
-        orderId,
-        wasSafe,
-        feedback,
+        safetyConfirmed: true,
+        status: 'DELIVERED',
       },
     });
-    
-    // Update order status if needed
-    await prisma.order.update({
-      where: { id: orderId },
-      data: { status: 'DELIVERED' }
-    });
-
-    res.json(safety);
+    res.json({ message: 'Safety confirmed', order });
   } catch (error) {
     res.status(500).json({ error: 'Failed to confirm safety' });
   }
