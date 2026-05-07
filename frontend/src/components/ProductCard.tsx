@@ -19,6 +19,9 @@ export default function ProductCard({ product }: { product: ProductProps }) {
     <div className={`${styles.card} card`}>
       <div className={styles.imageContainer}>
         <img src={product.image} alt={product.name} className={styles.image} />
+        <button className={styles.wishlistBtn} aria-label="Add to wishlist">
+          ❤️
+        </button>
         {product.discount && <span className={styles.discountBadge}>-{product.discount}%</span>}
         {product.stock <= 0 && <span className={styles.oosBadge}>Out of Stock</span>}
         {product.stock > 0 && product.stock < 10 && <span className={styles.lowStockBadge}>Only {product.stock} left!</span>}
