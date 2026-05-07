@@ -1,132 +1,215 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import styles from './kit-builder.module.css';
 
 const KITS = [
   {
     id: 'exam',
-    name: 'Exam Survival Kit',
-    basePrice: 249,
+    name: 'Exam Kit',
+    tagline: 'Gear up for your exams. Everything in one box.',
+    discount: 0.10,
     items: [
-      { id: 'k1', name: 'Transparent Pouch', price: 45, optional: false },
-      { id: 'k2', name: 'Blue Pens (Pack of 3)', price: 30, optional: false },
-      { id: 'k3', name: 'Mechanical Pencil', price: 60, optional: true },
-      { id: 'k4', name: 'Scientific Calculator', price: 850, optional: true },
-      { id: 'k5', name: 'Energy Drink', price: 110, optional: true }
+      { id: 'e1', name: 'Ballpoint Pens (5 pack)', price: 50, mandatory: true, category: 'Stationery' },
+      { id: 'e2', name: 'Highlighters (4 colors)', price: 120, mandatory: false, category: 'Stationery' },
+      { id: 'e3', name: 'Sticky Notes (2 pads)', price: 80, mandatory: false, category: 'Stationery' },
+      { id: 'e4', name: 'A4 Ruled Notebook', price: 65, mandatory: true, category: 'Stationery' },
+      { id: 'e5', name: 'Geometry Box / Calculator', price: 250, mandatory: false, category: 'Stationery' },
+      { id: 'e6', name: 'Instant Coffee (5 pack)', price: 45, mandatory: true, category: 'Food' },
+      { id: 'e7', name: 'Dark Chocolate Bar', price: 100, mandatory: false, category: 'Food' },
+      { id: 'e8', name: 'Throat Lozenges', price: 30, mandatory: false, category: 'Health' },
+      { id: 'e9', name: 'Paracetamol Strip', price: 25, mandatory: false, category: 'Health' },
+      { id: 'e10', name: 'Ear Plugs', price: 150, mandatory: false, category: 'Health' }
+    ]
+  },
+  {
+    id: 'women',
+    name: 'Women\'s Essentials Kit',
+    tagline: 'Your comfort kit, delivered with care.',
+    discount: 0.12,
+    discreetPackaging: true,
+    items: [
+      { id: 'w1', name: 'Sanitary Pads (10 pack)', price: 180, mandatory: true, category: 'Hygiene', brands: ['Whisper', 'Stayfree', 'Sofy'] },
+      { id: 'w2', name: 'Pantyliners (20 pack)', price: 120, mandatory: false, category: 'Hygiene' },
+      { id: 'w3', name: 'Pain Relief Roll-on', price: 95, mandatory: false, category: 'Health' },
+      { id: 'w4', name: 'Dark Chocolate (Comfort)', price: 160, mandatory: true, category: 'Food' },
+      { id: 'w5', name: 'Herbal Tea Bags (5 pack)', price: 75, mandatory: false, category: 'Food' },
+      { id: 'w6', name: 'Face Wash (Travel Size)', price: 55, mandatory: false, category: 'Hygiene' },
+      { id: 'w7', name: 'Moisturizer (Travel Size)', price: 65, mandatory: false, category: 'Hygiene' },
+      { id: 'w8', name: 'Period Underwear (3 pack)', price: 450, mandatory: false, category: 'Hygiene' },
+      { id: 'w9', name: 'Wet Wipes (20 pack)', price: 80, mandatory: true, category: 'Hygiene' },
+      { id: 'w10', name: 'Hair Ties (10 pack)', price: 40, mandatory: false, category: 'Accessories' }
     ]
   },
   {
     id: 'starter',
     name: 'New Student Starter Kit',
-    basePrice: 1299,
+    tagline: 'Move in ready. Everything a first-year needs.',
+    discount: 0.15,
     items: [
-      { id: 's1', name: 'Bucket & Mug Set', price: 250, optional: false },
-      { id: 's2', name: 'Broom & Dustpan', price: 120, optional: false },
-      { id: 's3', name: 'Mattress Protector', price: 450, optional: false },
-      { id: 's4', name: 'Door Mat', price: 90, optional: true },
-      { id: 's5', name: 'Multi-plug Extension', price: 350, optional: true }
+      { id: 's1', name: 'Bedsheet (Single)', price: 450, mandatory: true, category: 'Home' },
+      { id: 's2', name: 'Pillow Cover', price: 90, mandatory: true, category: 'Home' },
+      { id: 's3', name: 'Laundry Bag', price: 150, mandatory: false, category: 'Home' },
+      { id: 's4', name: 'Detergent Sachet (5 pack)', price: 50, mandatory: true, category: 'Home' },
+      { id: 's5', name: 'Bathroom Slippers', price: 199, mandatory: true, category: 'Apparel' },
+      { id: 's6', name: 'Towel (Medium)', price: 250, mandatory: false, category: 'Home' },
+      { id: 's7', name: 'Shampoo (Travel Size)', price: 45, mandatory: true, category: 'Hygiene' },
+      { id: 's8', name: 'Body Wash (Travel Size)', price: 55, mandatory: true, category: 'Hygiene' },
+      { id: 's9', name: 'Toothbrush + Paste Combo', price: 120, mandatory: true, category: 'Hygiene' },
+      { id: 's10', name: 'Extension Cord (1.5m)', price: 350, mandatory: false, category: 'Electronics' },
+      { id: 's11', name: 'Stationery Pack', price: 150, mandatory: false, category: 'Stationery' },
+      { id: 's12', name: 'Clothes Hangers (5 pack)', price: 80, mandatory: false, category: 'Home' },
+      { id: 's13', name: 'Combination Padlock', price: 299, mandatory: true, category: 'Hardware' }
     ]
   }
 ];
 
-export default function KitBuilder() {
-  const [selectedKit, setSelectedKit] = useState(KITS[0]);
-  const [selectedItems, setSelectedItems] = useState<string[]>(
-    KITS[0].items.filter(i => !i.optional).map(i => i.id)
-  );
+export default function KitBuilderPage() {
+  const [activeKitId, setActiveKitId] = useState(KITS[0].id);
+  const [selectedItems, setSelectedItems] = useState<{ [key: string]: { selected: boolean, qty: number, brand?: string } }>(() => {
+    const initial: any = {};
+    KITS.forEach(kit => {
+      kit.items.forEach(item => {
+        initial[item.id] = { selected: item.mandatory, qty: 1, brand: item.brands ? item.brands[0] : undefined };
+      });
+    });
+    return initial;
+  });
+
+  const activeKit = useMemo(() => KITS.find(k => k.id === activeKitId)!, [activeKitId]);
 
   const toggleItem = (id: string) => {
-    setSelectedItems(prev => 
-      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-    );
+    setSelectedItems(prev => ({
+      ...prev,
+      [id]: { ...prev[id], selected: !prev[id].selected }
+    }));
   };
 
-  const currentTotal = selectedKit.items
-    .filter(i => selectedItems.includes(i.id))
-    .reduce((sum, i) => sum + i.price, 0);
+  const updateQty = (id: string, delta: number) => {
+    setSelectedItems(prev => ({
+      ...prev,
+      [id]: { ...prev[id], qty: Math.max(1, prev[id].qty + delta) }
+    }));
+  };
+
+  const updateBrand = (id: string, brand: string) => {
+    setSelectedItems(prev => ({
+      ...prev,
+      [id]: { ...prev[id], brand }
+    }));
+  };
+
+  const totals = useMemo(() => {
+    let subtotal = 0;
+    activeKit.items.forEach(item => {
+      const config = selectedItems[item.id];
+      if (config.selected) {
+        subtotal += item.price * config.qty;
+      }
+    });
+    const discount = subtotal * activeKit.discount;
+    return { subtotal, discount, total: subtotal - discount };
+  }, [activeKit, selectedItems]);
 
   return (
     <div className={styles.page}>
       <Navbar />
       <main className="container">
-        <div className={styles.header}>
+        <header className={styles.header}>
           <h1>Essential Kit Builder</h1>
-          <p>Customize your survival kit and save up to 15% on bundles.</p>
+          <p>Customize your survival bundles with exclusive discounts.</p>
+        </header>
+
+        <div className={styles.kitSelector}>
+          {KITS.map(kit => (
+            <button 
+              key={kit.id} 
+              className={`${styles.kitTab} ${activeKitId === kit.id ? styles.activeTab : ''}`}
+              onClick={() => setActiveKitId(kit.id)}
+            >
+              {kit.name}
+            </button>
+          ))}
         </div>
 
-        <div className={styles.content}>
-          <div className={styles.kitSelector}>
-            {KITS.map(kit => (
-              <button 
-                key={kit.id}
-                className={`${styles.kitTab} ${selectedKit.id === kit.id ? styles.activeTab : ''}`}
-                onClick={() => {
-                  setSelectedKit(kit);
-                  setSelectedItems(kit.items.filter(i => !i.optional).map(i => i.id));
-                }}
-              >
-                {kit.name}
-              </button>
-            ))}
-          </div>
-
-          <div className={styles.builderGrid}>
-            <div className={`${styles.checklist} card`}>
-              <h3>Customize Checklist</h3>
-              <div className={styles.itemsList}>
-                {selectedKit.items.map(item => (
-                  <div key={item.id} className={styles.itemRow}>
+        <div className={styles.builderGrid}>
+          <section className={styles.checklistSection}>
+            <h3>Customize {activeKit.name}</h3>
+            <p className={styles.tagline}>"{activeKit.tagline}"</p>
+            
+            <div className={styles.itemsList}>
+              {activeKit.items.map(item => (
+                <div key={item.id} className={`${styles.itemRow} ${selectedItems[item.id].selected ? styles.rowSelected : ''}`}>
+                  <div className={styles.itemMain}>
+                    <input 
+                      type="checkbox" 
+                      checked={selectedItems[item.id].selected}
+                      disabled={item.mandatory}
+                      onChange={() => toggleItem(item.id)}
+                    />
                     <div className={styles.itemInfo}>
-                      <input 
-                        type="checkbox" 
-                        id={item.id}
-                        checked={selectedItems.includes(item.id)}
-                        disabled={!item.optional}
-                        onChange={() => toggleItem(item.id)}
-                      />
-                      <label htmlFor={item.id}>
-                        {item.name}
-                        {!item.optional && <span className={styles.mandatory}>Mandatory</span>}
-                      </label>
+                      <span className={styles.itemName}>{item.name}</span>
+                      {item.mandatory && <span className={styles.mandatoryBadge}>Mandatory</span>}
+                      {item.brands && selectedItems[item.id].selected && (
+                        <select 
+                          className={styles.brandSelect}
+                          value={selectedItems[item.id].brand}
+                          onChange={(e) => updateBrand(item.id, e.target.value)}
+                        >
+                          {item.brands.map(b => <option key={b} value={b}>{b}</option>)}
+                        </select>
+                      )}
                     </div>
-                    <span className={styles.itemPrice}>₹{item.price}</span>
                   </div>
-                ))}
-              </div>
+                  
+                  <div className={styles.itemActions}>
+                    {selectedItems[item.id].selected && (
+                      <div className={styles.qtyControl}>
+                        <button onClick={() => updateQty(item.id, -1)}>-</button>
+                        <span>{selectedItems[item.id].qty}</span>
+                        <button onClick={() => updateQty(item.id, 1)}>+</button>
+                      </div>
+                    )}
+                    <span className={styles.itemPrice}>₹{item.price * selectedItems[item.id].qty}</span>
+                  </div>
+                </div>
+              ))}
             </div>
+          </section>
 
-            <div className={styles.previewSection}>
-              <div className={`${styles.previewCard} card`}>
-                <div className={styles.previewImage}>
-                  <div className={styles.kitIcon}>🎒</div>
+          <aside className={styles.previewSection}>
+            <div className={`${styles.previewCard} card`}>
+              <h3>Bundle Summary</h3>
+              {activeKit.discreetPackaging && (
+                <div className={styles.discreetToggle}>
+                  <label>📦 Discreet Packaging</label>
+                  <input type="checkbox" defaultChecked />
                 </div>
-                <h3>{selectedKit.name}</h3>
-                <p>{selectedItems.length} items selected</p>
-                
-                <div className={styles.summary}>
-                  <div className={styles.summaryRow}>
-                    <span>Subtotal</span>
-                    <span>₹{currentTotal}</span>
-                  </div>
-                  <div className={styles.summaryRow}>
-                    <span>Bundle Discount (10%)</span>
-                    <span className={styles.discount}>-₹{Math.round(currentTotal * 0.1)}</span>
-                  </div>
-                  <hr />
-                  <div className={`${styles.summaryRow} ${styles.total}`}>
-                    <span>Total Price</span>
-                    <span>₹{currentTotal - Math.round(currentTotal * 0.1)}</span>
-                  </div>
+              )}
+              <div className={styles.summaryRows}>
+                <div className={styles.summaryRow}>
+                  <span>Subtotal</span>
+                  <span>₹{totals.subtotal.toFixed(0)}</span>
                 </div>
-                
-                <button className="btn-primary" style={{ width: '100%', marginTop: '20px' }}>
-                  Add Kit to Cart
-                </button>
+                <div className={`${styles.summaryRow} ${styles.discountRow}`}>
+                  <span>Bundle Discount ({(activeKit.discount * 100).toFixed(0)}%)</span>
+                  <span>-₹{totals.discount.toFixed(0)}</span>
+                </div>
+                <hr />
+                <div className={`${styles.summaryRow} ${styles.totalRow}`}>
+                  <span>Final Price</span>
+                  <span>₹{totals.total.toFixed(0)}</span>
+                </div>
               </div>
+              <button className="btn-primary" style={{ width: '100%', marginTop: '20px' }}>
+                Add Kit to Cart
+              </button>
+              <button className={styles.btnSaveKit}>
+                💾 Save as "My Kit"
+              </button>
             </div>
-          </div>
+          </aside>
         </div>
       </main>
     </div>
