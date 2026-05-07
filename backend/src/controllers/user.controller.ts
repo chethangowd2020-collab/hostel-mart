@@ -33,7 +33,7 @@ export const updateProfile = async (req: Request, res: Response) => {
 
 export const getProfile = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params['id'] as string;
     const user = await prisma.user.findUnique({
       where: { id },
       include: {

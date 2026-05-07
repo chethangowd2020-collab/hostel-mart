@@ -3,20 +3,13 @@ import prisma from '../services/prisma';
 
 export const getProducts = async (req: Request, res: Response) => {
   try {
-    const { category, isSOS, isExpiringSoon, isTrending } = req.query;
-
+    const { category, search } = req.query;
     const products = await prisma.product.findMany({
       where: {
-        ...(category && { category: String(category) }),
-        ...(isSOS === 'true' && { isSOS: true }),
-        ...(isExpiringSoon === 'true' && { isExpiringSoon: true }),
-        ...(isTrending === 'true' && { isTrending: true }),
-      },
-      include: {
-        reviews: true,
+        category: category ? (category as string) : undefined,
+        name: search ? { contains: search as string, mode: 'insensitive' } : undefined,
       },
     });
-
     res.json(products);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch products' });
@@ -25,20 +18,10 @@ export const getProducts = async (req: Request, res: Response) => {
 
 export const getProductById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params['id'] as string;
     const product = await prisma.product.findUnique({
       where: { id },
-      include: {
-        reviews: {
-          include: {
-            student: {
-              select: {
-                college: { select: { name: true } },
-              },
-            },
-          },
-        },
-      },
+      include: { reviews: true },
     });
     if (!product) return res.status(404).json({ error: 'Product not found' });
     res.json(product);
@@ -49,11 +32,14 @@ export const getProductById = async (req: Request, res: Response) => {
 
 export const registerRestockNotify = async (req: Request, res: Response) => {
   try {
-    const { productId, studentId } = req.body;
-    await prisma.restockNotifier.create({
-      data: { productId, studentId },
+    const { studentId, productId } = req.body;
+    const notifier = await prisma.restockNotifier.create({
+      data: {
+        userId: studentId,
+        productId,
+      },
     });
-    res.json({ message: 'You will be notified when this item is back in stock!' });
+    res.json(notifier);
   } catch (error) {
     res.status(500).json({ error: 'Failed to register notification' });
   }

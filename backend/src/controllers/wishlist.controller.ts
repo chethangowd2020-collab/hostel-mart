@@ -19,7 +19,7 @@ export const addToWishlist = async (req: Request, res: Response) => {
 
 export const getWishlist = async (req: Request, res: Response) => {
   try {
-    const { studentId } = req.params;
+    const studentId = req.params['studentId'] as string;
     if (!studentId) return res.status(400).json({ error: 'Student ID is required' });
 
     const wishlist = await prisma.wishlistProduct.findMany({

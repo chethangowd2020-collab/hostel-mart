@@ -39,7 +39,7 @@ export const postProductReview = async (req: Request, res: Response) => {
 
 export const upvoteReview = async (req: Request, res: Response) => {
   try {
-    const { reviewId } = req.params;
+    const reviewId = req.params['reviewId'] as string;
     await prisma.review.update({
       where: { id: reviewId },
       data: { upvotes: { increment: 1 } }
