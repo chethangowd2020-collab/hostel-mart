@@ -116,3 +116,64 @@
   background: var(--primary-hover);
   transform: scale(1.1);
 }
+
+.oosBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.lowStockBadge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #FF2D2D;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(255, 45, 45, 0.3);
+}
+
+.trendingBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: white;
+  color: var(--text-main);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.notifyButton {
+  background: #F1F5F9;
+  color: var(--text-main);
+  padding: 8px 15px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #E2E8F0;
+}
+
+.notifyButton:hover {
+  background: white;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.bellIcon {
+  font-size: 1rem;
+}

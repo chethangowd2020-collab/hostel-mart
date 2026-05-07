@@ -162,6 +162,40 @@ export default function Home() {
           </div>
         </section>
 
+        {/* FEATURE 8 — Back in Stock (Bookmarked) */}
+        <section className="container" style={{ marginTop: '50px' }}>
+          <div className={styles.sectionHeader}>
+            <div className={styles.headerLeft}>
+              <h2>Back in Stock</h2>
+              <span className={styles.badgeGreen}>Bookmarked Items</span>
+            </div>
+          </div>
+          <div className={styles.productGrid}>
+            <ProductCard 
+              product={{
+                id: 'restock1',
+                name: 'Scientific Calculator',
+                price: 850,
+                originalPrice: 999,
+                image: 'https://images.unsplash.com/photo-1574607383077-47ddc2dc51c4?q=80&w=1000',
+                category: 'Stationery',
+                stock: 5,
+                isTrending: true
+              }} 
+            />
+            <ProductCard 
+              product={{
+                id: 'restock2',
+                name: 'Nescafe Coffee Box',
+                price: 180,
+                image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=1000',
+                category: 'Food',
+                stock: 15
+              }} 
+            />
+          </div>
+        </section>
+
         {/* Categories Section */}
         <section className="container" style={{ marginTop: '50px', paddingBottom: '100px' }}>
           <div className={styles.sectionHeader}>
