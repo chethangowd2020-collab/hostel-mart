@@ -56,10 +56,10 @@ const CATEGORIES = [
 ];
 
 const SOS_PRODUCTS = [
-  { id: 's3', name: 'Type-C Cable', price: 149, originalPrice: 199, image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=400', category: 'Electronics', stock: 10 },
   { id: 's4', name: 'Instant Coffee', price: 8, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=400', category: 'Study Fuel', stock: 50 },
-  { id: 's5', name: 'Lightning Cable', price: 199, image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=400', category: 'Electronics', stock: 15 },
   { id: 's6', name: 'Toothbrush', price: 40, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400', category: 'Personal Care', stock: 20 },
+  { id: 's7', name: 'Sanitary Pads (XL)', price: 90, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400', category: "Women's Essentials", stock: 30 },
+  { id: 's8', name: 'Bathing Soap', price: 35, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400', category: 'Personal Care', stock: 40 },
 ];
 
 const QUICK_MEALS = [
@@ -270,17 +270,24 @@ export default function Home() {
         <section className="container" style={{ marginTop: '50px' }}>
           <div className={styles.sectionHeader}><h2>Explore Categories</h2></div>
           <div className={styles.categoriesGrid}>
-            {CATEGORIES.map(cat => (
-              <Link 
-                href={cat.name === 'Medical' ? '/medical' : '#'} 
-                key={cat.name} 
-                className={styles.categoryCard} 
-                style={{ borderBottom: `3px solid ${cat.color}`, textDecoration: 'none' }}
-              >
-                <div className={styles.catEmoji}>{cat.emoji}</div>
-                <span>{cat.name}</span>
-              </Link>
-            ))}
+            {CATEGORIES.map(cat => {
+              // Route to /sos for Emergency SOS, /medical for Medical, otherwise dynamic category page
+              const href = cat.name === 'Emergency SOS' ? '/sos' 
+                        : cat.name === 'Medical' ? '/medical' 
+                        : `/category/${cat.name.toLowerCase().replace(/ /g, '-')}`;
+              
+              return (
+                <Link 
+                  href={href} 
+                  key={cat.name} 
+                  className={styles.categoryCard} 
+                  style={{ borderBottom: `3px solid ${cat.color}`, textDecoration: 'none' }}
+                >
+                  <div className={styles.catEmoji}>{cat.emoji}</div>
+                  <span>{cat.name}</span>
+                </Link>
+              );
+            })}
           </div>
         </section>
 
