@@ -6,12 +6,10 @@ import ProductCard from '@/components/ProductCard';
 import styles from './sos.module.css';
 
 const SOS_CATALOG = [
-  { id: 'sos1', name: 'Whisper Ultra Sanitary Pads (Pack of 7)', price: 95, originalPrice: 105, image: 'https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?q=80&w=1000', category: 'Hygiene', stock: 50 },
+  { id: 'sos1', name: 'Whisper Ultra Sanitary Pads (Pack of 7)', price: 95, originalPrice: 105, image: 'https://images.unsplash.com/photo-1627384113743-6bd5a474fffd?q=80&w=1000', category: 'Hygiene', stock: 50 },
   { id: 'sos2', name: 'Dolo 650 - Strip of 15', price: 32, originalPrice: 35, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1000', category: 'Medicines', stock: 30 },
-  { id: 'sos3', name: 'USB-C Fast Charging Cable (1m)', price: 349, originalPrice: 499, image: 'https://images.unsplash.com/photo-1588503080517-8e7c10b7b137?q=80&w=1000', category: 'Electronics', stock: 15 },
   { id: 'sos4', name: 'Maggi Cup Noodles - Masala', price: 50, originalPrice: 50, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=1000', category: 'Food', stock: 100 },
-  { id: 'sos5', name: 'Red Bull Energy Drink (250ml)', price: 115, originalPrice: 125, image: 'https://images.unsplash.com/photo-1622543953490-3b7bc4b39c65?q=80&w=1000', category: 'Drinks', stock: 45 },
-  { id: 'sos6', name: 'Eveready AA Batteries (4 Pack)', price: 80, originalPrice: 90, image: 'https://images.unsplash.com/photo-1590059521360-ec535f299159?q=80&w=1000', category: 'Hardware', stock: 20 }
+  { id: 'sos5', name: 'Red Bull Energy Drink (250ml)', price: 115, originalPrice: 125, image: 'https://images.unsplash.com/photo-1622543953490-3b7bc4b39c65?q=80&w=1000', category: 'Drinks', stock: 45 }
 ];
 
 export default function SOSPage() {

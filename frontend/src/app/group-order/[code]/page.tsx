@@ -23,7 +23,7 @@ export default function GroupOrder({ params }: { params: Promise<{ code: string 
     
     socket.emit('join-room', code);
 
-    socket.on('cart-updated', (data: { userId: string, cartItems: any[] }) => {
+socket.on('cart-updated', (data: { userId: string, cartItems: any[] }) => {
       setMembers((prevMembers) =>
         prevMembers.map((member) =>
           member.id === data.userId ? { ...member, items: data.cartItems } : member

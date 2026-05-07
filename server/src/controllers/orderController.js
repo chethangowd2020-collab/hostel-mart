@@ -45,7 +45,11 @@ exports.addItemToGroupCart = async (req, res) => {
   if (member) {
     member.items.push({ ...product, quantity });
     // Emit update to all members in the room
-    io.to(roomCode).emit('cart_updated', cart);
+    // Aligned with frontend expected structure: { userId, cartItems }
+    io.to(roomCode).emit('cart-updated', { 
+      userId, 
+      cartItems: member.items 
+    });
   }
 
   res.json(cart);
