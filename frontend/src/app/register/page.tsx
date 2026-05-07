@@ -12,7 +12,8 @@ export default function Register() {
     college: '',
     hostel: '',
     room: '',
-    gender: ''
+    gender: '',
+    password: ''
   });
 
   const handleNext = (e: React.FormEvent) => {
@@ -20,10 +21,47 @@ export default function Register() {
     setStep(2);
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate registration
-    window.location.href = '/';
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch(`${apiUrl}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone: formData.phone,
+          password: formData.password,
+          name: formData.name,
+          collegeName: formData.college,
+          hostel: formData.hostel,
+          room: formData.room,
+          gender: formData.gender,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        window.location.href = '/profile';
+      } else {
+        setError(data.error || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        setError('Server is not responding. Please ensure backend is running on port 5000.');
+      } else {
+        setError('Cannot connect to server. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,6 +71,8 @@ export default function Register() {
           <h1>Hostel<span>Mart</span></h1>
           <p>{step === 1 ? 'Create your student account' : 'Verify your phone number'}</p>
         </div>
+        
+        {error && <div className={styles.errorBanner}>{error}</div>}
 
         {step === 1 ? (
           <form className={styles.form} onSubmit={handleNext}>
@@ -103,7 +143,7 @@ export default function Register() {
                 </select>
               </div>
             </div>
-            <button type="submit" className="btn-primary">Send OTP</button>
+            <button type="submit" className="btn-primary" disabled={loading}>{loading ? 'Sending...' : 'Send OTP'}</button>
             <p className={styles.footerText}>
               Already have an account? <Link href="/login">Login</Link>
             </p>
@@ -118,7 +158,7 @@ export default function Register() {
                 ))}
               </div>
             </div>
-            <button type="submit" className="btn-primary">Verify & Register</button>
+            <button type="submit" className="btn-primary" disabled={loading}>{loading ? 'Verifying...' : 'Verify & Register'}</button>
             <button type="button" className={styles.resendBtn} onClick={() => setStep(1)}>
               Back to details
             </button>

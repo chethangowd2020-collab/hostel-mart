@@ -45,8 +45,13 @@ export default function Login() {
       } else {
         setError(data.error || 'Login failed');
       }
-    } catch {
-      setError('Cannot connect to server. Please try again.');
+    } catch (error) {
+      console.error('Error:', error);
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        setError('Server is not responding. Please ensure backend is running on port 5000.');
+      } else {
+        setError('Cannot connect to server. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -85,8 +90,13 @@ export default function Login() {
       } else {
         setError(data.error || 'Registration failed');
       }
-    } catch {
-      setError('Cannot connect to server. Please try again.');
+    } catch (error) {
+      console.error('Error:', error);
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        setError('Server is not responding. Please ensure backend is running on port 5000.');
+      } else {
+        setError('Cannot connect to server. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
