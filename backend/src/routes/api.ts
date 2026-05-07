@@ -4,13 +4,13 @@ import { createOrder, getOrderHistory, confirmSafety } from '../controllers/orde
 import { getProfile, updateCollege, upgradeToPrime, updateProfile } from '../controllers/user.controller';
 import { addToWishlist, getWishlist } from '../controllers/wishlist.controller';
 import { postProductReview, upvoteReview } from '../controllers/review.controller';
-import { sendOTP, verifyOTP } from '../controllers/auth.controller';
+import { login, register } from '../controllers/auth.controller';
 
 const router = express.Router();
 
-// Auth (Feature 12 Real OTP)
-router.post('/auth/send-otp', sendOTP);
-router.post('/auth/verify-otp', verifyOTP);
+// Auth — Password Based Login
+router.post('/auth/register', register);
+router.post('/auth/login', login);
 
 // Products
 router.get('/products', getProducts);

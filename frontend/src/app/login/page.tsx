@@ -6,115 +6,87 @@ import styles from './login.module.css';
 
 export default function Login() {
   const router = useRouter();
-  const [step, setStep] = useState(1); // 1: Phone, 2: OTP, 3: Profile Setup
-  const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [mode, setMode] = useState<'login' | 'register'>('login');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [userId, setUserId] = useState('');
-  
-  const [profile, setProfile] = useState({
+
+  const [form, setForm] = useState({
+    phone: '',
+    password: '',
+    confirmPassword: '',
     name: '',
-    college: 'SJBIT', // Defaulted to SJBIT as requested
+    college: 'SJBIT',
     hostel: '',
-    room: ''
+    room: '',
   });
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
-  const handlePhoneSubmit = async (e: React.FormEvent) => {
+  const update = (field: string, value: string) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+    setError('');
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    
     try {
-      const res = await fetch(`${apiUrl}/auth/send-otp`, {
+      const res = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
-      });
-      if (res.ok) {
-        setStep(2);
-      } else {
-        const data = await res.json();
-        setError(data.error || 'Failed to send OTP');
-      }
-    } catch (err) {
-      setError('Connection failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleOtpChange = (index: number, value: string) => {
-    if (value.length > 1) return;
-    const newOtp = [...otp];
-    newOtp[index] = value;
-    setOtp(newOtp);
-    
-    if (value && index < 5) {
-      const nextInput = document.getElementById(`otp-${index + 1}`);
-      nextInput?.focus();
-    }
-  };
-
-  const handleOtpSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    
-    try {
-      const res = await fetch(`${apiUrl}/auth/verify-otp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, code: otp.join('') }),
+        body: JSON.stringify({ phone: form.phone, password: form.password }),
       });
       const data = await res.json();
       if (res.ok) {
-        setUserId(data.user?.id || 'temp-id'); // In a real app, verify-otp would return the user
-        if (data.isNewUser) {
-          setStep(3);
-        } else {
-          // Store user session (localStorage for demo)
-          localStorage.setItem('user', JSON.stringify(data.user));
-          router.push('/');
-        }
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        router.push('/');
       } else {
-        setError(data.error || 'Invalid OTP');
+        setError(data.error || 'Login failed');
       }
-    } catch (err) {
-      setError('Verification failed.');
+    } catch {
+      setError('Cannot connect to server. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleProfileSubmit = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (form.password !== form.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    if (form.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
     setLoading(true);
     setError('');
-
     try {
-      const res = await fetch(`${apiUrl}/users/update-profile`, {
+      const res = await fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          studentId: userId,
-          name: profile.name,
-          collegeName: profile.college,
-          hostel: profile.hostel,
-          room: profile.room
+          phone: form.phone,
+          password: form.password,
+          name: form.name,
+          collegeName: form.college,
+          hostel: form.hostel,
+          room: form.room,
         }),
       });
       const data = await res.json();
       if (res.ok) {
-        localStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
         router.push('/profile');
       } else {
-        setError(data.error || 'Failed to save profile');
+        setError(data.error || 'Registration failed');
       }
-    } catch (err) {
-      setError('Failed to connect to server.');
+    } catch {
+      setError('Cannot connect to server. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -130,111 +102,116 @@ export default function Login() {
       <div className={`${styles.loginCard} glass-card`}>
         <div className={styles.brandHeader}>
           <h1>Hostel<span>Mart</span></h1>
-          <div className={styles.stepper}>
-            <div className={`${styles.stepDot} ${step >= 1 ? styles.activeDot : ''}`}></div>
-            <div className={`${styles.stepLine} ${step >= 2 ? styles.activeLine : ''}`}></div>
-            <div className={`${styles.stepDot} ${step >= 2 ? styles.activeDot : ''}`}></div>
-            <div className={`${styles.stepLine} ${step >= 3 ? styles.activeLine : ''}`}></div>
-            <div className={`${styles.stepDot} ${step >= 3 ? styles.activeDot : ''}`}></div>
-          </div>
+          <p className={styles.tagline}>Your campus store, delivered fast.</p>
+        </div>
+
+        {/* Toggle */}
+        <div className={styles.modeToggle}>
+          <button
+            className={`${styles.toggleBtn} ${mode === 'login' ? styles.activeToggle : ''}`}
+            onClick={() => { setMode('login'); setError(''); }}
+          >Login</button>
+          <button
+            className={`${styles.toggleBtn} ${mode === 'register' ? styles.activeToggle : ''}`}
+            onClick={() => { setMode('register'); setError(''); }}
+          >Register</button>
         </div>
 
         {error && <div className={styles.errorBanner}>{error}</div>}
 
-        {step === 1 && (
-          <form className={styles.fadeSlide} onSubmit={handlePhoneSubmit}>
-            <h2>Welcome to the Mart 👋</h2>
-            <p>Enter your mobile number to get started.</p>
-            <div className={styles.inputWrapper}>
-              <span className={styles.prefix}>+91</span>
-              <input 
-                type="tel" 
-                placeholder="Phone Number" 
-                maxLength={10}
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                autoFocus
-                disabled={loading}
-              />
-            </div>
-            <button type="submit" className="btn-primary" disabled={loading}>
-              {loading ? 'Sending...' : 'Get OTP'}
-            </button>
-          </form>
-        )}
-
-        {step === 2 && (
-          <form className={styles.fadeSlide} onSubmit={handleOtpSubmit}>
-            <h2>Verify your number 🔐</h2>
-            <p>Enter the 6-digit code sent to <strong>{phone}</strong></p>
-            <div className={styles.otpGrid}>
-              {otp.map((digit, i) => (
-                <input 
-                  key={i}
-                  id={`otp-${i}`}
-                  type="text"
-                  maxLength={1}
-                  className={styles.otpBox}
-                  value={digit}
-                  onChange={(e) => handleOtpChange(i, e.target.value)}
-                  autoFocus={i === 0}
+        {mode === 'login' ? (
+          <form className={styles.fadeSlide} onSubmit={handleLogin}>
+            <div className={styles.inputGroup}>
+              <label>Mobile Number</label>
+              <div className={styles.inputWrapper}>
+                <span className={styles.prefix}>+91</span>
+                <input
+                  type="tel"
+                  placeholder="10-digit number"
+                  maxLength={10}
+                  required
+                  value={form.phone}
+                  onChange={e => update('phone', e.target.value)}
                   disabled={loading}
                 />
-              ))}
+              </div>
             </div>
-            <button type="submit" className="btn-primary" disabled={loading}>
-              {loading ? 'Verifying...' : 'Verify OTP'}
-            </button>
-            <button type="button" className={styles.linkBtn} onClick={() => setStep(1)} disabled={loading}>
-              Change Phone Number
-            </button>
-          </form>
-        )}
 
-        {step === 3 && (
-          <form className={styles.fadeSlide} onSubmit={handleProfileSubmit}>
-            <h2>Complete Your Profile 🎓</h2>
-            <p>Help us customize your experience.</p>
-            
             <div className={styles.inputGroup}>
-              <label>Full Name</label>
-              <input 
-                type="text" 
-                placeholder="Student Name" 
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Enter your password"
                 required
-                value={profile.name}
-                onChange={(e) => setProfile({...profile, name: e.target.value})}
+                value={form.password}
+                onChange={e => update('password', e.target.value)}
                 disabled={loading}
+                className={styles.fullInput}
               />
             </div>
 
+            <button type="submit" className="btn-primary" disabled={loading}>
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+            <p className={styles.switchText}>
+              New student?{' '}
+              <span onClick={() => setMode('register')}>Create an account</span>
+            </p>
+          </form>
+        ) : (
+          <form className={styles.fadeSlide} onSubmit={handleRegister}>
             <div className={styles.inputGroup}>
-              <label>Your College</label>
-              <select 
-                required
-                value={profile.college}
-                disabled // Locked to SJBIT as requested
-                onChange={(e) => setProfile({...profile, college: e.target.value})}
-              >
-                <option value="SJBIT">SJBIT</option>
-              </select>
+              <label>Full Name</label>
+              <input type="text" placeholder="Your name" required value={form.name}
+                onChange={e => update('name', e.target.value)} disabled={loading} className={styles.fullInput} />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Mobile Number</label>
+              <div className={styles.inputWrapper}>
+                <span className={styles.prefix}>+91</span>
+                <input type="tel" placeholder="10-digit number" maxLength={10} required
+                  value={form.phone} onChange={e => update('phone', e.target.value)} disabled={loading} />
+              </div>
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>College</label>
+              <input type="text" value="SJBIT" disabled className={styles.fullInput} />
             </div>
 
             <div className={styles.row}>
-              <div className={styles.inputGroup}>
-                <label>Hostel Name</label>
-                <input type="text" placeholder="Block B" required value={profile.hostel} onChange={(e) => setProfile({...profile, hostel: e.target.value})} disabled={loading} />
+              <div className={styles.inputGroup} style={{ flex: 1 }}>
+                <label>Hostel Block</label>
+                <input type="text" placeholder="e.g. Block B" required value={form.hostel}
+                  onChange={e => update('hostel', e.target.value)} disabled={loading} className={styles.fullInput} />
               </div>
-              <div className={styles.inputGroup} style={{ width: '100px' }}>
+              <div className={styles.inputGroup} style={{ width: '90px' }}>
                 <label>Room #</label>
-                <input type="text" placeholder="304" required value={profile.room} onChange={(e) => setProfile({...profile, room: e.target.value})} disabled={loading} />
+                <input type="text" placeholder="304" required value={form.room}
+                  onChange={e => update('room', e.target.value)} disabled={loading} className={styles.fullInput} />
               </div>
             </div>
 
+            <div className={styles.inputGroup}>
+              <label>Password</label>
+              <input type="password" placeholder="Min. 6 characters" required value={form.password}
+                onChange={e => update('password', e.target.value)} disabled={loading} className={styles.fullInput} />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Confirm Password</label>
+              <input type="password" placeholder="Repeat password" required value={form.confirmPassword}
+                onChange={e => update('confirmPassword', e.target.value)} disabled={loading} className={styles.fullInput} />
+            </div>
+
             <button type="submit" className="btn-primary" disabled={loading}>
-              {loading ? 'Saving Profile...' : 'Start Shopping'}
+              {loading ? 'Creating Account...' : 'Create Account'}
             </button>
+            <p className={styles.switchText}>
+              Already registered?{' '}
+              <span onClick={() => setMode('login')}>Login here</span>
+            </p>
           </form>
         )}
       </div>
